@@ -7,3 +7,9 @@ export interface UserDetails {
     photo: string;
     contact: number
 }
+
+export interface SlotDetails {
+    spotNumber: number;
+    duration: number;
+    charge: number;
+}

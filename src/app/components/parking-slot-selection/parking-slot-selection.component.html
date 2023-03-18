@@ -1,18 +1,29 @@
+<div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let slot of [1,2,3,4,5]" (click)="onSlotClick(slot)">{{slot}}</div>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let slot of [6,7,8,9,10]" (click)="onSlotClick(slot)">{{slot}}</div>
+  </div>
+</div>
 
-    <div>
-        <div class="grid-container">
-            <div class="grid-item">1</div>
-            <div class="grid-item">2</div>
-            <div class="grid-item">3</div>
-            <div class="grid-item">4</div>
-            <div class="grid-item">5</div>
-           
-          </div>
-          <div class="grid-container">
-            <div class="grid-item">6</div>
-            <div class="grid-item">7</div>
-            <div class="grid-item">8</div>
-            <div class="grid-item">9</div>
-            <div class="grid-item">10</div>
-          </div>
+<div class="row" style="margin-top: 3em;">
+  <div class="column">
+    <h3>Charges</h3>
+    <div>First 4 hrs – 200 INR</div>
+    <div>4 hrs to 12 hrs – 30 INR per hour</div>
+    <div>12 hrs to 24 hrs – 25 INR per hour</div>
+  </div>
+  <div class="column">
+    <label for="duration">Duration: </label>
+    <input type="number" id="duration" [formControl]="duration" (keyup)="onDurationChange()" />&nbsp;Hours
+    <br />
+    <div style="margin-top: 2em;">
+      <label for="duration">Amount: </label>
+      <span>{{charge}}&nbsp;INR</span>
     </div>
+    <div style="margin-top: 2em;">
+      <button type="button" (click)="submit()" [disabled]="isInvalid">Book</button>
+    </div>
+  </div>
+</div>

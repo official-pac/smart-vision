@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserDetails } from './interface';
+import { SlotDetails, UserDetails } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,15 @@ export class StorageService {
   get userDetails(): UserDetails {
     const data = sessionStorage.getItem('userDetails');
     return data ? JSON.parse(data) : [];
+  }
+
+  set slotDetails(slotDetails: SlotDetails) {
+    sessionStorage.setItem('slotDetails', JSON.stringify(slotDetails));
+  }
+
+  get slotDetails(): SlotDetails {
+    const data = sessionStorage.getItem('slotDetails');
+    return data ? JSON.parse(data) : null;
   }
 
 }
