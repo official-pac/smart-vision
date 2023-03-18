@@ -3,6 +3,7 @@
         <form novalidate>
             <div>
                 <label for="registrationNumber">Registration Number: </label>
+                <!-- TODO: Add pipe to capitalize -->
                 <input type="text" id="registrationNumber" name="registrationNumber" [formControl]="registrationNumber"
                     placeholder="e.g. MH05EB7542" />
                 <div>
@@ -16,7 +17,7 @@
                 </ng-container>
             </div>
             <div>
-                <button type="button" name="submit" (click)="search()">Search</button>
+                <button type="button" name="submit" (click)="submit()">Search</button>
             </div>
         </form>
     </div>

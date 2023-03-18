@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataShareService } from 'src/app/services/data-share.service';
+import { HttpService } from 'src/app/services/http.service';
+import { UserDetails } from 'src/app/services/interface';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-search-car',
@@ -15,11 +17,12 @@ export class SearchCarComponent implements OnInit {
 
   // TODO: Add validators like should be alpha-numeric, min length, max length etc.
   registrationNumber!: FormControl;
-  constructor(private router: Router, private dataShareService: DataShareService) { }
+  constructor(private router: Router, private storageService: StorageService, private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.initField();
-    this.dataShareService.clearStorage();
+    this.storageService.clearSessionStorage();
+    this.seedStorage();
   }
 
   private initField() {
@@ -27,12 +30,38 @@ export class SearchCarComponent implements OnInit {
     Validators.maxLength(15), Validators.pattern('[\\w]+$')]);
   }
 
-  search(): void {
-    console.log('value: ', this.registrationNumber.value);
-    if (this.registrationNumber.valid) {
-      this.dataShareService.setRegistrationNumber(this.registrationNumber.value)
-      this.router.navigate(['registration']);
-    }
+  private async searchCar(): Promise<UserDetails | null> {
+    try {
+      // return firstValueFrom(this.httpService.get(''))
+      //   .catch(error => { throw error; })
+      const userDetailsFromDB = this.storageService.allUserDetails
+        ?.find((ele: UserDetails) => ele.rcNumber === this.registrationNumber.value);
+      return userDetailsFromDB ? userDetailsFromDB : null;
+    } catch (error) { throw error; }
+  }
+
+  submit(): void {
+    try {
+      console.log('value: ', this.registrationNumber.valid);
+      if (this.registrationNumber.valid) {
+        // this.dataShareService.setRegistrationNumber(this.registrationNumber.value);
+        this.searchCar()
+          .then((val: UserDetails | null) => {
+            console.log('user-details: ', val);
+            if (val) {
+              this.storageService.userDetails = val;
+              this.router.navigate(['car-details']);
+            } else { this.router.navigate(['registration']); }
+          });
+      }
+    } catch (error) { }
+  }
+
+  private seedStorage(): void {
+    this.storageService.allUserDetails = [{
+      ownerName: 'Arun', rcNumber: 'MH05EB7542', carType: 'SUV',
+      plateType: 'General', emailId: 'arun.chandran@gmail.com', contact: 9876543210, photo: ''
+    }]
   }
 
 }

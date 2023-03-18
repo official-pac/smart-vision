@@ -1,1 +1,20 @@
-<p>car-details works!</p>
+<div style="text-align: center;">
+    <span>
+        <label><b>Name: </b></label> {{userDetails?.ownerName}}
+    </span>
+    <br />
+    <span>
+        <label><b>Email ID: </b></label> {{userDetails?.emailId}}
+    </span>
+    <br />
+    <span>
+        <label><b>RC Number: </b></label> {{userDetails?.rcNumber}}
+    </span>
+    <br />
+    <span>
+        <label><b>Car Type: </b></label> {{userDetails?.carType}}
+    </span>
+</div>
+<div  style="text-align: center;">
+    <button type="button" (click)="navigate()">Next</button>
+</div>
