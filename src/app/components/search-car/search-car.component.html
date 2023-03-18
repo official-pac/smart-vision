@@ -1,0 +1,23 @@
+<div class="page-block">
+    <div class="form-block">
+        <form novalidate>
+            <div>
+                <label for="registrationNumber">Registration Number: </label>
+                <input type="text" id="registrationNumber" name="registrationNumber" [formControl]="registrationNumber"
+                    placeholder="e.g. MH05EB7542" />
+                <div>
+                    <span>(*Input the car registration number without any space)</span>
+                </div>
+                <!-- TODO: Make error dynamic -->
+                <ng-container *ngIf="registrationNumber?.dirty && registrationNumber?.invalid">
+                    <span *ngIf="registrationNumber?.errors?.['minlength']">* Minimum 7 characters required</span>
+                    <span *ngIf="registrationNumber?.errors?.['maxlength']">* Maximum 15 characters allowed</span>
+                    <span *ngIf="registrationNumber?.errors?.['pattern']">* Invalid Format</span>
+                </ng-container>
+            </div>
+            <div>
+                <button type="button" name="submit" (click)="search()">Search</button>
+            </div>
+        </form>
+    </div>
+</div>

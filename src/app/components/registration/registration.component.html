@@ -1,0 +1,35 @@
+<div>
+    <form [formGroup]="form" novalidate>
+        <div>
+            <label for="ownerName">Owner: </label>
+            <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" />
+        </div>
+        <div>
+            <label for="emailId">Email ID: </label>
+            <input type="email" id="emailId" name="emailId" formControlName="emailId" />
+        </div>
+        <div>
+            <label for="rcNumber">RC Number: </label>
+            <input type="text" id="rcNumber" name="rcNumber" formControlName="rcNumber" />
+        </div>
+        <div>
+            <label for="carType">Car Type: </label>
+            <input type="text" id="carType" name="carType" formControlName="carType" />
+        </div>
+        <div>
+            <label for="plateType">Plate Type: </label>
+            <input type="text" id="plateType" name="plateType" formControlName="plateType" />
+        </div>
+        <div>
+            <label for="photo">Photo: </label>
+            <input type="text" id="photo" name="photo" formControlName="photo" />
+        </div>
+        <div>
+            <label for="contact">Contact Number: </label>
+            <input type="number" id="contact" name="contact" formControlName="contact" />
+        </div>
+    </form>
+    <div>
+        <button type="button" (click)="register()">Register</button>
+    </div>
+</div>
