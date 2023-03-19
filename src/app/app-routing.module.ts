@@ -24,6 +24,10 @@ const routes: Routes = [
     loadComponent: () => import('./components/parking-slot-selection/parking-slot-selection.component')
       .then((mod) => mod.ParkingSlotSelectionComponent)
   },
+  {
+    path: 'payment',
+    loadComponent: () => import('./components/payments/payments.component').then((mod) => mod.PaymentsComponent)
+  },
   { path: '', pathMatch: 'full', redirectTo: 'search' },
   { path: '**', redirectTo: 'search' }
 ];

@@ -1,0 +1,21 @@
+<div style="text-align: center; border-radius: 1em;">
+    <ng-container #container></ng-container>
+    <ng-template #cash>
+        <div>
+            <label for="amount">Amount:</label>&nbsp;
+            <input type="number" (formControl)="amount">&nbsp;INR
+        </div>
+        <div>
+            <label for="Cash Amount">Cash Amount:</label>&nbsp;
+            <input type="number" (formControl)="cashAmount">&nbsp;INR
+        </div>
+    </ng-template>
+    <ng-template #card>Card mode</ng-template>
+    <div style="align-items: end;">
+        <p>Please select your mode of payment:</p>
+        <label for="cash">Cash</label>
+        <input type="radio" id="cash" name="paymentMode" value="1">&nbsp;&nbsp;
+        <label for="card">Card</label>
+        <input type="radio" id="card" name="paymentMode" value="2">
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -14,8 +15,8 @@ export class ParkingSlotSelectionComponent implements OnInit {
 
   charge = 0;
   duration!: FormControl;
-  spot: number = 0;
-  constructor(private storageService: StorageService) { }
+  slot: number = 0;
+  constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
     this.initField();
@@ -27,7 +28,7 @@ export class ParkingSlotSelectionComponent implements OnInit {
   }
 
   onSlotClick(index: number): void {
-    this.spot = index;
+    this.slot = index;
   }
 
   private calculateCharge(duration: number): number {
@@ -58,11 +59,12 @@ export class ParkingSlotSelectionComponent implements OnInit {
 
   submit(): void {
     if (this.isInvalid) return;
-    this.storageService.slotDetails = { charge: this.charge, duration: this.duration.value, spotNumber: this.spot };
+    this.storageService.slotDetails = { charge: this.charge, duration: this.duration.value, spotNumber: this.slot };
+    this.router.navigate(['payment']);
   }
 
   get isInvalid() {
-    return this.duration.invalid || this.spot === 0
+    return this.duration.invalid || this.slot === 0
   }
 
 }
