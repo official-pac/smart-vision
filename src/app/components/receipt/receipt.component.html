@@ -1,4 +1,12 @@
-<p>receipt works!</p>
-<!-- TODO:
-    Delete this module and see if receipt can be shown in a popup with download option
--->
+<div style="text-align: center;">
+    <div style="margin-top: 2em;">
+        <div>
+            <h3>Receipt</h3>
+            <div>Transaction Id: {{transactionId}}</div>
+            <div>Car Registration Number: {{carRegistrationNumber}}</div>
+            <div>Transaction Time: {{transactionTime | date: 'medium'}}</div>
+            <div>Total Amount: {{totalAmount | number : '1.2-2'}}&nbsp;INR</div>
+        </div>
+
+    </div>
+</div>

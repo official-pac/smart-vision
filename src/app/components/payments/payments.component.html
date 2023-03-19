@@ -3,19 +3,21 @@
     <ng-template #cash>
         <div>
             <label for="amount">Amount:</label>&nbsp;
-            <input type="number" (formControl)="amount">&nbsp;INR
+            <input type="number" [formControl]="amount">&nbsp;INR
         </div>
-        <div>
-            <label for="Cash Amount">Cash Amount:</label>&nbsp;
-            <input type="number" (formControl)="cashAmount">&nbsp;INR
+        <p><b>Keep the cash at then marked spot and click the 'Pay' button below</b></p>
+        <div *ngIf="!isProcessing">
+            <button type="button" (click)="pay()">Pay</button>
         </div>
+        <div *ngIf="isProcessing"><b>Please wait...</b></div>
+        <br />
     </ng-template>
     <ng-template #card>Card mode</ng-template>
     <div style="align-items: end;">
         <p>Please select your mode of payment:</p>
         <label for="cash">Cash</label>
-        <input type="radio" id="cash" name="paymentMode" value="1">&nbsp;&nbsp;
+        <input type="radio" id="cash" name="paymentMode" value="1" [formControl]="paymentMode" (change)="setMode(1)">&nbsp;&nbsp;
         <label for="card">Card</label>
-        <input type="radio" id="card" name="paymentMode" value="2">
+        <input type="radio" id="card" name="paymentMode" value="2" [formControl]="paymentMode" (change)="setMode(2)">
     </div>
 </div>

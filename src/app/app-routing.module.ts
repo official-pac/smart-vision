@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'payment',
     loadComponent: () => import('./components/payments/payments.component').then((mod) => mod.PaymentsComponent)
   },
+  {
+    path: 'receipt',
+    loadComponent: () => import('./components/receipt/receipt.component').then((mod) => mod.ReceiptComponent)
+  },
   { path: '', pathMatch: 'full', redirectTo: 'search' },
   { path: '**', redirectTo: 'search' }
 ];

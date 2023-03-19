@@ -40,4 +40,13 @@ export class StorageService {
     return data ? JSON.parse(data) : null;
   }
 
+  set transactionTime(time: number) {
+    sessionStorage.setItem('transactionTime', String(time));
+  }
+
+  get transactionTime(): number {
+    const time = sessionStorage.getItem('transactionTime');
+    return time ? Number(time) : 0;
+  }
+
 }
