@@ -9,7 +9,7 @@ import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 @Component({
   selector: 'app-payment-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective ],
+  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective],
   templateUrl: './payment-card.component.html',
   styleUrls: ['./payment-card.component.css'],
 })
@@ -42,8 +42,12 @@ export class PaymentCardComponent implements OnInit {
       if (this.form.invalid) return;
       this.isProcessing = true;
       setTimeout(() => {
-        this.storageService.transactionTime = Date.now();
-        this.router.navigate(['receipt']);
+        this.isProcessing = false;
+        this.complete.next({
+          dateAndTimeOfTransaction: Date.now(),
+          status: 'SUCCESS',
+          transactionId: `MH${Math.floor(Math.random() * 999)}`
+        });
       }, 3000);
     } catch (error) { console.log(error); }
   }

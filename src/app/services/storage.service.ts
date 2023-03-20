@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SlotDetails, UserDetails } from './interface';
+import { SlotDetails, TransactionDetails, UserDetails } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -40,13 +40,13 @@ export class StorageService {
     return data ? JSON.parse(data) : null;
   }
 
-  set transactionTime(time: number) {
-    sessionStorage.setItem('transactionTime', String(time));
+  set transactionDetails(txnDetails: TransactionDetails) {
+    sessionStorage.setItem('txnDetails', JSON.stringify(txnDetails));
   }
 
-  get transactionTime(): number {
-    const time = sessionStorage.getItem('transactionTime');
-    return time ? Number(time) : 0;
+  get transactionDetails(): TransactionDetails {
+    const txnDetails = sessionStorage.getItem('txnDetails');
+    return txnDetails ? JSON.parse(txnDetails) : null;
   }
 
 }

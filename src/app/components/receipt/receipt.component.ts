@@ -28,8 +28,8 @@ export class ReceiptComponent implements OnInit {
   private initDetails() {
     this.carRegistrationNumber = this.storageService.userDetails?.rcNumber;
     this.totalAmount = this.storageService.slotDetails?.charge;
-    this.transactionId = `MH${Math.floor(Math.random() * 999)}`;
-    this.transactionTime = this.storageService.transactionTime;
+    this.transactionId = this.storageService.transactionDetails?.transactionId;
+    this.transactionTime = this.storageService.transactionDetails?.dateAndTimeOfTransaction;
   }
 
   showTimer() {

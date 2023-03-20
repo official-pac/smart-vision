@@ -5,6 +5,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
 import { DataShareService } from 'src/app/services/data-share.service';
 import { PaymentCardComponent } from '../payment-card/payment-card.component';
+import { TransactionDetails } from 'src/app/services/interface';
 
 @Component({
   selector: 'app-payments',
@@ -48,9 +49,18 @@ export class PaymentsComponent implements OnInit, AfterViewInit {
   pay(): void {
     this.isProcessing = true;
     setTimeout(() => {
-      this.storageService.transactionTime = Date.now();
+      // this.storageService.transactionTime = Date.now();
       this.router.navigate(['receipt']);
     }, 3000);
+  }
+
+  onPaymentComplete(txnDetails: TransactionDetails) {
+    if (txnDetails?.status === 'SUCCESS') {
+      this.storageService.transactionDetails = txnDetails;
+      this.router.navigate(['receipt']);
+    } else {
+      // TODO: Route To Payment Failed Page
+    }
   }
 
 }
