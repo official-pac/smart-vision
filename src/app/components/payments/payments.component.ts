@@ -1,16 +1,18 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
 import { DataShareService } from 'src/app/services/data-share.service';
+import { PaymentCardComponent } from '../payment-card/payment-card.component';
 
 @Component({
   selector: 'app-payments',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PaymentCardComponent],
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.css']
+  styleUrls: ['./payments.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PaymentsComponent implements OnInit, AfterViewInit {
 
@@ -21,24 +23,25 @@ export class PaymentsComponent implements OnInit, AfterViewInit {
   paymentMode!: FormControl;
   isProcessing = false;
   constructor(private storageService: StorageService, private changeDetectorRef: ChangeDetectorRef,
-    private router: Router, private dataShareService: DataShareService) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.initControls();
   }
 
   ngAfterViewInit(): void {
-    this.setMode(1);
+    this.setMode();
   }
 
   private initControls(): void {
     this.amount = new FormControl({ value: this.storageService.slotDetails?.charge, disabled: true }, Validators.required);
-    this.paymentMode = new FormControl('1', [Validators.required]);
+    this.paymentMode = new FormControl("2", [Validators.required]);
   }
 
-  setMode(modeId: number): void {
+  setMode(): void {
+    console.log('value: ', this.paymentMode.value);
     this.container.clear();
-    modeId === 1 ? this.container.createEmbeddedView(this.cashTemplate) : this.container.createEmbeddedView(this.cardTemplate);
+    this.paymentMode.value === "1" ? this.container.createEmbeddedView(this.cashTemplate) : this.container.createEmbeddedView(this.cardTemplate);
     this.changeDetectorRef.detectChanges();
   }
 

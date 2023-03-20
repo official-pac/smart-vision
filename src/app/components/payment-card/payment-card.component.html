@@ -1,0 +1,31 @@
+<div style="text-align: center; margin: 1em;">
+    <div>
+        <label for="cardHolderName">Payable Amount:</label>&nbsp; {{payableAmount | number: '1.2-2'}}&nbsp;INR
+    </div>
+    <form [formGroup]="form" novalidate>
+        <div style="margin-top: 1em;">
+            <label for="cardHolderName">Cardholder Name:</label>&nbsp;
+            <input type="text" formControlName="cardHolderName" appUpperCase>
+        </div>
+        <div style="margin-top: 1em;">
+            <label for="cardNumber">Card Number:</label>&nbsp;
+            <input type="number" formControlName="cardNumber">
+        </div>
+        <div style="margin-top: 1em;">
+            <label for="yearOfExpiry">Year Of Expiry:</label>&nbsp;
+            <input type="number" formControlName="yearOfExpiry" maxlength=2>
+        </div>
+        <div style="margin-top: 1em;">
+            <label for="monthOfExpiry">Month Of Expiry:</label>&nbsp;
+            <input type="number" formControlName="monthOfExpiry" maxlength=2>
+        </div>
+        <div style="margin-top: 1em;">
+            <label for="cvv">CVV:</label>&nbsp;
+            <input type="number" formControlName="cvv" maxlength="3">
+        </div>
+        <div *ngIf="!isProcessing" style="margin-top: 1em;">
+            <button type="button" (click)="makePayment()" [disabled]="this.form.invalid">Pay</button>
+        </div>
+        <div *ngIf="isProcessing"><b>Please wait...</b></div>
+    </form>
+</div>

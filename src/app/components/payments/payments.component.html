@@ -12,12 +12,14 @@
         <div *ngIf="isProcessing"><b>Please wait...</b></div>
         <br />
     </ng-template>
-    <ng-template #card>Card mode</ng-template>
+    <ng-template #card>
+        <app-payment-card></app-payment-card>
+    </ng-template>
     <div style="align-items: end;">
         <p>Please select your mode of payment:</p>
         <label for="cash">Cash</label>
-        <input type="radio" id="cash" name="paymentMode" value="1" [formControl]="paymentMode" (change)="setMode(1)">&nbsp;&nbsp;
+        <input type="radio" id="cash" name="paymentMode" value="1" [formControl]="paymentMode" (change)="setMode()">&nbsp;&nbsp;
         <label for="card">Card</label>
-        <input type="radio" id="card" name="paymentMode" value="2" [formControl]="paymentMode" (change)="setMode(2)">
+        <input type="radio" id="card" name="paymentMode" value="2" [formControl]="paymentMode" (change)="setMode()">
     </div>
 </div>

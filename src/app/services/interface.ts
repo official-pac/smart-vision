@@ -13,3 +13,9 @@ export interface SlotDetails {
     duration: number;
     charge: number;
 }
+
+export interface TransactionDetails {
+    status: string,
+    transactionId: string,
+    dateAndTimeOfTransaction: number
+}
