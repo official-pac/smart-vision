@@ -11,7 +11,9 @@ export class UpperCaseDirective {
 
   @HostListener('keyup')
   onChange() {
-    this.elementRef.value = this.elementRef.value.toUpperCase();
+    try {
+        this.elementRef.value = this.elementRef.value?.toUpperCase();
+    } catch (error) { console.log(error); }
   }
 
 }
