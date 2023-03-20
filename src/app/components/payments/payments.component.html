@@ -1,20 +1,15 @@
 <div style="text-align: center; border-radius: 1em;">
+
     <ng-container #container></ng-container>
+
     <ng-template #cash>
-        <div>
-            <label for="amount">Amount:</label>&nbsp;
-            <input type="number" [formControl]="amount">&nbsp;INR
-        </div>
-        <p><b>Keep the cash at then marked spot and click the 'Pay' button below</b></p>
-        <div *ngIf="!isProcessing">
-            <button type="button" (click)="pay()">Pay</button>
-        </div>
-        <div *ngIf="isProcessing"><b>Please wait...</b></div>
-        <br />
+        <app-payments-cash (complete)="onPaymentComplete($event)"></app-payments-cash>
     </ng-template>
+
     <ng-template #card>
         <app-payment-card (complete)="onPaymentComplete($event)"></app-payment-card>
     </ng-template>
+
     <div style="align-items: end;">
         <p>Please select your mode of payment:</p>
         <label for="cash">Cash</label>

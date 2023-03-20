@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
-import { DataShareService } from 'src/app/services/data-share.service';
 import { PaymentCardComponent } from '../payment-card/payment-card.component';
 import { TransactionDetails } from 'src/app/services/interface';
+import { PaymentsCashComponent } from '../payments-cash/payments-cash.component';
 
 @Component({
   selector: 'app-payments',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PaymentCardComponent],
+  imports: [CommonModule, ReactiveFormsModule, PaymentCardComponent, PaymentsCashComponent],
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -20,9 +20,8 @@ export class PaymentsComponent implements OnInit, AfterViewInit {
   @ViewChild('container', { read: ViewContainerRef }) container !: ViewContainerRef;
   @ViewChild('cash') cashTemplate!: TemplateRef<any>;
   @ViewChild('card') cardTemplate!: TemplateRef<any>;
-  amount!: FormControl;
+  
   paymentMode!: FormControl;
-  isProcessing = false;
   constructor(private storageService: StorageService, private changeDetectorRef: ChangeDetectorRef,
     private router: Router) { }
 
@@ -35,23 +34,13 @@ export class PaymentsComponent implements OnInit, AfterViewInit {
   }
 
   private initControls(): void {
-    this.amount = new FormControl({ value: this.storageService.slotDetails?.charge, disabled: true }, Validators.required);
     this.paymentMode = new FormControl("2", [Validators.required]);
   }
 
   setMode(): void {
-    console.log('value: ', this.paymentMode.value);
     this.container.clear();
     this.paymentMode.value === "1" ? this.container.createEmbeddedView(this.cashTemplate) : this.container.createEmbeddedView(this.cardTemplate);
     this.changeDetectorRef.detectChanges();
-  }
-
-  pay(): void {
-    this.isProcessing = true;
-    setTimeout(() => {
-      // this.storageService.transactionTime = Date.now();
-      this.router.navigate(['receipt']);
-    }, 3000);
   }
 
   onPaymentComplete(txnDetails: TransactionDetails) {

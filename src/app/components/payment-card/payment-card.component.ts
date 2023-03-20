@@ -37,7 +37,7 @@ export class PaymentCardComponent implements OnInit {
     });
   }
 
-  makePayment() {
+  makePayment(): void {
     try {
       if (this.form.invalid) return;
       this.isProcessing = true;

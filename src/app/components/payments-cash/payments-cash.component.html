@@ -1,0 +1,12 @@
+<ng-container>
+    <div>
+        <label for="amount">Amount:</label>&nbsp;
+        <input type="number" [formControl]="amount">&nbsp;INR
+    </div>
+    <p><b>Keep the cash at then marked spot and click the 'Pay' button below</b></p>
+    <div *ngIf="!isProcessing">
+        <button type="button" (click)="makePayment()">Pay</button>
+    </div>
+    <div *ngIf="isProcessing"><b>Please wait...</b></div>
+    <br />
+</ng-container>
