@@ -5,7 +5,7 @@
     <form [formGroup]="form" novalidate>
         <div style="margin-top: 1em;">
             <label for="cardHolderName">Cardholder Name:</label>&nbsp;
-            <input type="text" formControlName="cardHolderName" appUpperCase>
+            <input type="text" formControlName="cardHolderName">
         </div>
         <div style="margin-top: 1em;">
             <label for="cardNumber">Card Number:</label>&nbsp;
@@ -41,8 +41,7 @@
     <div class="mb-3 row">
         <label class="col-sm-4 col-form-label ">Cardholder Name</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" placeholder="Enter Name" formControlName="cardHolderName"
-                appUpperCase>
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="cardHolderName">
             <div *ngIf="form?.get('cardHolderName')?.dirty && form?.get('cardHolderName')?.invalid">
                 <p class="errorMsg" *ngIf="form?.get('cardHolderName')?.errors?.['minlength']">* Minimum 2
                     characters required</p>

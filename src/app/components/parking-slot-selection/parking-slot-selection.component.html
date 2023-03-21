@@ -2,12 +2,14 @@
   <div class="row">
     <div class="col mt-5">
       <div class="grid-container">
-        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 1 ? 'booked-slots' : 'available-slots'"
-          *ngFor="let slot of slotsRowOne" (click)="onSlotClick(slot)">{{slot.slotNumber}}</div>
+        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 0 ? 'booked-slots' : 'available-slots'"
+          *ngFor="let slot of slotsRowOne" (click)="onSlotClick(slot)"
+          [ngStyle]="{'cursor': slot.bookingStatusCode === 0 ? 'not-allowed' : 'pointer'}">{{slot.slotNumber}}</div>
       </div>
       <div class="grid-container">
-        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 1 ? 'booked-slots' : 'available-slots'"
-          *ngFor="let slot of slotsRowTwo" (click)="onSlotClick(slot)">{{slot.slotNumber}}</div>
+        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 0 ? 'booked-slots' : 'available-slots'"
+          *ngFor="let slot of slotsRowTwo" (click)="onSlotClick(slot)"
+          [ngStyle]="{'cursor': slot.bookingStatusCode === 0 ? 'not-allowed' : 'pointer'}">{{slot.slotNumber}}</div>
       </div>
 
     </div>
@@ -41,8 +43,8 @@
                     Format</span>
                   <span class="errorMsg" *ngIf="duration?.errors?.['required']">* Mandatory
                     field</span>
-                    <span class="errorMsg" *ngIf="duration?.errors?.['max']">* Maximum duration is 24 hours</span>
-                    <span class="errorMsg" *ngIf="duration?.errors?.['min']">* Minimum duration is 1 hour</span>
+                  <span class="errorMsg" *ngIf="duration?.errors?.['max']">* Maximum duration is 24 hours</span>
+                  <span class="errorMsg" *ngIf="duration?.errors?.['min']">* Minimum duration is 1 hour</span>
                 </div>
               </div>
               <div class="col-sm-2">

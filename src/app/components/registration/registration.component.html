@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-6">
                     <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" class="form-control"
-                        aria-describedby="ownerName" appUpperCase>
+                        aria-describedby="ownerName">
                     <div *ngIf="form?.get('ownerName')?.dirty && form?.get('ownerName')?.invalid">
                         <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['minlength']">* Minimum 2
                             characters required</span>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-6">
                     <input type="email" id="emailId" name="emailId" formControlName="emailId" class="form-control"
-                        aria-describedby="emailId" appUpperCase>
+                        aria-describedby="emailId">
                     <div *ngIf="form?.get('emailId')?.dirty && form?.get('emailId')?.invalid">
                         <span class="errorMsg" *ngIf="form?.get('emailId')?.errors?.['email']">* Invalid
                             Format</span>
@@ -98,7 +98,7 @@
             </div>
 
             <!-- Photo -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="photo" class="col-form-label">Photo</label>
                 </div>
@@ -106,7 +106,7 @@
                     <input type="text" id="photo" name="photo" formControlName="photo" class="form-control"
                         aria-describedby="photo">
                 </div>
-            </div>
+            </div> -->
 
             <!-- Contact -->
             <div class=" row align-items-center rgform">

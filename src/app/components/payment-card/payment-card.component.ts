@@ -4,12 +4,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { StorageService } from 'src/app/services/storage.service';
 import { TransactionDetails } from 'src/app/services/interface';
 import { Router } from '@angular/router';
-import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 
 @Component({
   selector: 'app-payment-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './payment-card.component.html',
   styleUrls: ['./payment-card.component.css'],
 })
