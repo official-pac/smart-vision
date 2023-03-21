@@ -29,11 +29,16 @@ export class PaymentCardComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.fb.group({
-      cardNumber: ['', [Validators.required, Validators.minLength(16)]],
-      cardHolderName: ['', [Validators.required, Validators.minLength(2)]],
-      yearOfExpiry: ['', [Validators.required, Validators.maxLength(2), Validators.minLength(2)]],
-      monthOfExpiry: ['', [Validators.required, Validators.maxLength(2), Validators.minLength(2)]],
-      cvv: [null, [Validators.required, Validators.maxLength(3)]]
+      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16),
+      Validators.pattern('[0-9]+$')]],
+      cardHolderName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50),
+      Validators.pattern('[a-zA-Z ]+$')]],
+      yearOfExpiry: ['', [Validators.required, Validators.maxLength(2), Validators.minLength(2),
+      Validators.pattern('[0-9]+$'), Validators.min(new Date().getFullYear() % 100)]],
+      monthOfExpiry: ['', [Validators.required, Validators.maxLength(2), Validators.minLength(2),
+      Validators.pattern('[0-9]+$'), Validators.min(new Date().getMonth() + 1), Validators.max]],
+      cvv: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(3),
+      Validators.pattern('[0-9]+$')]]
     });
   }
 
