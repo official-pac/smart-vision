@@ -1,20 +1,40 @@
-<div style="text-align: center;">
-    <span>
-        <label><b>Name: </b></label> {{userDetails?.ownerName}}
-    </span>
-    <br />
-    <span>
-        <label><b>Email ID: </b></label> {{userDetails?.emailId}}
-    </span>
-    <br />
-    <span>
-        <label><b>RC Number: </b></label> {{userDetails?.rcNumber}}
-    </span>
-    <br />
-    <span>
-        <label><b>Car Type: </b></label> {{userDetails?.carType}}
-    </span>
-</div>
-<div  style="text-align: center;">
-    <button type="button" (click)="navigate()">Next</button>
+<!-- new ui -->
+<div>
+    <div class="wrapper ">
+        <div id="formContent">
+            <h2 class="align-items-center mt-5">User Details</h2>
+            <div class="g-3 rgform">
+                <div class=" d-flex">
+                    <h5>Owner Name: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.ownerName}}</h6>
+                </div>
+                <div class=" d-flex">
+                    <h5>Email ID: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.emailId}}</h6>
+                </div>
+                <div class=" d-flex">
+                    <h5>RC Number: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.rcNumber}}</h6>
+                </div>
+                <div class=" d-flex">
+                    <h5>Car Type: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.carType}}</h6>
+                </div>
+                <div class=" d-flex">
+                    <h5>Plate Type: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.plateType}}</h6>
+                </div>
+                <div class=" d-flex">
+                    <h5>Contact: </h5>&nbsp;&nbsp;
+                    <h6 class="align-items-center mt-1">{{userDetails?.contact}}</h6>
+                </div>
+                <div class="d-flex btnSubmit">
+                    <button class="btn btn-primary" type="button" (click)="navigate()">Next</button>
+                </div>
+            </div>
+            <!-- <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="button" (click)="navigate()">Next</button>
+            </div> -->
+        </div>
+    </div>
 </div>
