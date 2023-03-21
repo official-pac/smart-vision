@@ -1,8 +1,4 @@
 <ng-container>
-    <!-- <div>
-        <label for="amount">Amount:</label>&nbsp;
-        <input type="number" [formControl]="amount">&nbsp;INR
-    </div> -->
     <div class="mb-3 row">
         <label class="col-sm-4 col-form-label">Amount</label>
         <div class="col-sm-8">
@@ -10,15 +6,11 @@
         </div>
     </div>
     <p><b>Keep the cash at then marked spot and click the 'Pay' button below</b></p>
-    <!-- <div *ngIf="!isProcessing">
-        <button type="button" (click)="makePayment()">Pay</button>
-    </div> -->
     <div class="d-grid gap-2 ">
         <button class="btn btn-primary" *ngIf="!isProcessing" type="button" (click)="makePayment()"
             style="margin-top: 1em;">Make
             Payment</button>
         <p *ngIf="isProcessing"><b>Please wait...</b></p>
     </div>
-    <!-- <div *ngIf="isProcessing"><b>Please wait...</b></div> -->
     <br />
 </ng-container>
