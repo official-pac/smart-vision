@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
-import { UserDetails } from 'src/app/services/interface';
+import { HttpService } from 'src/app/services/http.service';
+import { CarType, PlateType, UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -16,21 +18,15 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RegistrationComponent implements OnInit {
 
   form!: FormGroup;
-  carTypes: Array<{ type: string, displayName: string }> = [
-    { type: 'SUV', displayName: 'SUV' },
-    { type: 'SEDAN', displayName: 'Sedan' },
-    { type: 'HATCHBACK', displayName: 'Hatchback' },
-  ];
-  plateTypes: Array<{ type: string, displayName: string }> = [
-    { type: 'PUBLIC', displayName: 'Public' },
-    { type: 'PRIVATE', displayName: 'Private' },
-    { type: 'GOVERNMENT', displayName: 'Government' },
-    { type: 'TAXI', displayName: 'Taxi' },
-  ];
-  constructor(private fb: FormBuilder, private router: Router, private storageService: StorageService) { }
+  carTypes: Array<CarType> = [];
+  plateTypes: Array<PlateType> = [];
+  constructor(private fb: FormBuilder, private router: Router, private storageService: StorageService,
+    private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.initCarTypes();
+    this.initPlateTypes();
   }
 
   private initForm() {
@@ -63,6 +59,22 @@ export class RegistrationComponent implements OnInit {
         .then(() => this.router.navigate(['slots']))
         .catch(error => console.log('error: ', error));
     } else { console.log('invalid form', this.form.errors); }
+  }
+
+  private async initCarTypes(): Promise<any> {
+    try {
+      const data: Array<CarType> = await firstValueFrom(this.httpService.get('/car-types'));
+      this.carTypes = data;
+      return data;
+    } catch (error) { console.log('error: ', error); }
+  }
+
+  private async initPlateTypes(): Promise<any> {
+    try {
+      const data: Array<PlateType> = await firstValueFrom(this.httpService.get('/plate-types'));
+      this.plateTypes = data;
+      return data;
+    } catch (error) { console.log('error: ', error); }
   }
 
 }

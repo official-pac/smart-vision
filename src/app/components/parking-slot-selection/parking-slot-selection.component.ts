@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { SLOTS_ROW_ONE, SLOTS_ROW_TWO } from 'src/app/services/data-share.service';
+import { HttpService } from 'src/app/services/http.service';
 import { SlotInfo } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -19,12 +21,13 @@ export class ParkingSlotSelectionComponent implements OnInit {
   duration!: FormControl;
   selectedSlot?: SlotInfo;
   // TODO: Load this info from JSON file
-  slotsRowOne: Array<SlotInfo> = SLOTS_ROW_ONE;
-  slotsRowTwo: Array<SlotInfo> = SLOTS_ROW_TWO;
-  constructor(private storageService: StorageService, private router: Router) { }
+  slotsRowOne?: Array<SlotInfo>;
+  slotsRowTwo?: Array<SlotInfo>;
+  constructor(private storageService: StorageService, private router: Router, private httpService: HttpService) { }
 
   ngOnInit(): void {
     this.initField();
+    this.initSlots();
   }
 
   private initField(): void {
@@ -32,8 +35,18 @@ export class ParkingSlotSelectionComponent implements OnInit {
     Validators.pattern('[0-9]+$'), Validators.min(1), Validators.max(24)]);
   }
 
+  private async initSlots(): Promise<any> {
+    try {
+      const data: Array<SlotInfo> = await firstValueFrom(this.httpService.get('/parking-slots'));
+      const length = data.length;
+      this.slotsRowOne = data.slice(0, (length / 2));
+      this.slotsRowTwo = data.slice((length / 2), length);
+    } catch (error) { console.log(error); }
+  }
+
   onSlotClick(selectedSlot: SlotInfo): void {
-    this.selectedSlot = selectedSlot;
+    if (selectedSlot.bookingStatusCode === 1)
+      this.selectedSlot = selectedSlot;
   }
 
   private calculateCharge(duration: number): number {
