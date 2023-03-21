@@ -28,7 +28,7 @@ export class StorageService {
 
   get userDetails(): UserDetails {
     const data = sessionStorage.getItem('userDetails');
-    return data ? JSON.parse(data) : [];
+    return data ? JSON.parse(data) : null;
   }
 
   set slotDetails(slotDetails: SlotDetails) {

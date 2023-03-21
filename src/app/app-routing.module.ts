@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
-// TODO: Make components standalone of feasible
 // TODO: Set title as Parking Automation - Search
 const routes: Routes = [
   {

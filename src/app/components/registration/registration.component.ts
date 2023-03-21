@@ -39,6 +39,7 @@ export class RegistrationComponent implements OnInit {
       const savedUserDetails: Array<UserDetails> = this.storageService.allUserDetails;
       savedUserDetails.push(userDetails);
       this.storageService.allUserDetails = savedUserDetails;
+      this.storageService.userDetails = userDetails;
       return true;
     } catch (error) { throw error; }
   }
