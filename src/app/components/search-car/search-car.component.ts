@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 import { HttpService } from 'src/app/services/http.service';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,7 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './search-car.component.html',
   styleUrls: ['./search-car.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective]
 })
 export class SearchCarComponent implements OnInit {
 
