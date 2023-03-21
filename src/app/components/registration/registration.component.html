@@ -1,35 +1,96 @@
-<div>
-    <form [formGroup]="form" novalidate>
-        <div>
-            <label for="ownerName">Owner: </label>
-            <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" />
-        </div>
-        <div>
-            <label for="emailId">Email ID: </label>
-            <input type="email" id="emailId" name="emailId" formControlName="emailId" />
-        </div>
-        <div>
-            <label for="rcNumber">RC Number: </label>
-            <input type="text" id="rcNumber" name="rcNumber" formControlName="rcNumber" />
-        </div>
-        <div>
-            <label for="carType">Car Type: </label>
-            <input type="text" id="carType" name="carType" formControlName="carType" />
-        </div>
-        <div>
-            <label for="plateType">Plate Type: </label>
-            <input type="text" id="plateType" name="plateType" formControlName="plateType" />
-        </div>
-        <div>
-            <label for="photo">Photo: </label>
-            <input type="text" id="photo" name="photo" formControlName="photo" />
-        </div>
-        <div>
-            <label for="contact">Contact Number: </label>
-            <input type="number" id="contact" name="contact" formControlName="contact" />
-        </div>
-    </form>
-    <div>
-        <button type="button" (click)="submit()">Register</button>
+
+<div class="wrapper">
+    <div id="formContent">
+        <h2 class="align-items-center mt-5">Registration</h2>
+        <form [formGroup]="form" novalidate>
+            <!-- Name of Owner -->
+            <div class=" row mt-5 g-3 align-items-center rgform">
+                <div class="col-6">
+                    <label for="ownerName" class="col-form-label">Name of Owner&nbsp;<span
+                            style="color: red;">*</span></label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" class="form-control"
+                        aria-describedby="ownerName" appUpperCase>
+                    <!-- <div *ngIf="form?.dirty && form?.invalid">
+                        <span *ngIf="form?.errors?.['minlength']">* Minimum 7 characters required</span>
+                        <span *ngIf="form?.errors?.['maxlength']">* Maximum 15 characters allowed</span>
+                        <span *ngIf="form?.errors?.['pattern']">* Invalid Format</span>
+                    </div> -->
+                </div>
+            </div>
+            <!-- Email ID -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="emailId" class="col-form-label">Email ID&nbsp;<span style="color: red;">*</span></label>
+                </div>
+                <div class="col-6">
+                    <input type="email" id="emailId" name="emailId" formControlName="emailId" class="form-control"
+                        aria-describedby="emailId" appUpperCase>
+                </div>
+            </div>
+
+            <!-- RC Number -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="rcNumber" class="col-form-label">RC Number&nbsp;<span
+                            style="color: red;">*</span></label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="rcNumber" name="rcNumber" formControlName="rcNumber" class="form-control"
+                        aria-describedby="rcNumber" appUpperCase>
+                </div>
+            </div>
+
+            <!-- Car Type -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="carType" class="col-form-label">Car Type&nbsp;<span style="color: red;">*</span></label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="carType" name="carType" formControlName="carType" class="form-control"
+                        aria-describedby="carType">
+                </div>
+            </div>
+
+            <!-- Plate Type -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="plateType" class="col-form-label">Plate Type&nbsp;<span
+                            style="color: red;">*</span></label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="plateType" name="plateType" formControlName="plateType" class="form-control"
+                        aria-describedby="plateType">
+                </div>
+            </div>
+
+            <!-- Photo -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="photo" class="col-form-label">Photo</label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="photo" name="photo" formControlName="photo" class="form-control"
+                        aria-describedby="photo">
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class=" row align-items-center rgform">
+                <div class="col-6">
+                    <label for="contact" class="col-form-label">Contact</label>
+                </div>
+                <div class="col-6">
+                    <input type="number" id="contact" name="contact" formControlName="contact" class="form-control"
+                        aria-describedby="contact">
+                </div>
+            </div>
+
+            <div class="row align-items-center rgform">
+                <button class="btn btn-primary" type="button" (click)="submit()"
+                    [disabled]="form.invalid">Register</button>
+            </div>
+        </form>
     </div>
 </div>

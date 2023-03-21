@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -10,7 +11,7 @@ import { StorageService } from 'src/app/services/storage.service';
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, CommonModule, UpperCaseDirective]
 })
 export class RegistrationComponent implements OnInit {
 
