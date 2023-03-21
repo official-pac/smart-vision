@@ -1,4 +1,4 @@
-<div style="text-align: center; margin: 1em;">
+<div style="text-align: center; margin: 1em;" *ngIf="false">
     <div>
         <label for="cardHolderName">Payable Amount:</label>&nbsp; {{payableAmount | number: '1.2-2'}}&nbsp;INR
     </div>
@@ -29,3 +29,51 @@
         <div *ngIf="isProcessing"><b>Please wait...</b></div>
     </form>
 </div>
+
+<!-- new ui -->
+<form [formGroup]="form" novalidate>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label ">Payable Amount</label>
+        <div class="col-sm-8">
+            {{payableAmount | number: '1.2-2'}}&nbsp;INR
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label ">Cardholder Name</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="cardHolderName"
+                appUpperCase>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label">Card Number</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" placeholder="Card Number" formControlName="cardNumber">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label ">Year of Expiry</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="Enter Year (YY)" formControlName="yearOfExpiry"
+                maxlength=2>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label">Month of Expiry</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="Enter Month (MM)" formControlName="monthOfExpiry"
+                maxlength=2>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-4 col-form-label ">CVV</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="Enter CVV" formControlName="cvv" maxlength="3">
+        </div>
+    </div>
+    <div class="d-grid gap-2 ">
+        <button class="btn btn-primary" type="button" (click)="makePayment()" [disabled]="this.form.invalid"
+            *ngIf="!isProcessing" style="margin-top: 1em;">Make Payment</button>
+            <p *ngIf="isProcessing"><b>Please wait...</b></p>
+    </div>
+</form>

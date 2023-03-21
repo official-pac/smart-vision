@@ -1,4 +1,4 @@
-<div style="text-align: center; border-radius: 1em;">
+<div style="text-align: center; border-radius: 1em;" *ngIf="false">
 
     <ng-container #container></ng-container>
 
@@ -13,8 +13,51 @@
     <div style="align-items: end;">
         <p>Please select your mode of payment:</p>
         <label for="cash">Cash</label>
-        <input type="radio" id="cash" name="paymentMode" value="1" [formControl]="paymentMode" (change)="setMode()">&nbsp;&nbsp;
+        <input type="radio" id="cash" name="paymentMode" value="1" [formControl]="paymentMode"
+            (change)="setMode()">&nbsp;&nbsp;
         <label for="card">Card</label>
         <input type="radio" id="card" name="paymentMode" value="2" [formControl]="paymentMode" (change)="setMode()">
     </div>
 </div>
+
+<!-- new UI -->
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-6">
+                <div class="card" style="border-radius: 1rem;width: 35rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <h2>Payment Details</h2>
+                        <ng-container #container></ng-container>
+
+                        <ng-template #cash>
+                            <app-payments-cash (complete)="onPaymentComplete($event)"></app-payments-cash>
+                        </ng-template>
+
+                        <ng-template #card>
+                            <app-payment-card (complete)="onPaymentComplete($event)"></app-payment-card>
+                        </ng-template>
+                        <div class="mt-3">
+                            <h6>Please select your mode of payment</h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="card" name="paymentMode" value="2"
+                                    [formControl]="paymentMode" (change)="setMode()">
+                                <label class="form-check-label" for="inlineRadio2">Card</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="cash" name="paymentMode" value="1"
+                                    [formControl]="paymentMode" (change)="setMode()">
+                                <label class="form-check-label" for="inlineRadio1">Cash</label>
+                            </div>
+                        </div>
+
+                        <div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

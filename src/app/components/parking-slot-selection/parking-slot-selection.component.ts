@@ -67,7 +67,7 @@ export class ParkingSlotSelectionComponent implements OnInit {
     this.router.navigate(['payment']);
   }
 
-  get isInvalid() {
+  get isInvalid(): boolean {
     return this.duration.invalid || !this.selectedSlot;
   }
 

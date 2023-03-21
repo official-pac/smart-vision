@@ -38,9 +38,11 @@ export class PaymentsComponent implements OnInit, AfterViewInit {
   }
 
   setMode(): void {
-    this.container.clear();
-    this.paymentMode.value === "1" ? this.container.createEmbeddedView(this.cashTemplate) : this.container.createEmbeddedView(this.cardTemplate);
-    this.changeDetectorRef.detectChanges();
+    try {
+      this.container?.clear();
+      this.paymentMode.value === "1" ? this.container?.createEmbeddedView(this.cashTemplate) : this.container?.createEmbeddedView(this.cardTemplate);
+      this.changeDetectorRef.detectChanges();
+    } catch (error) { console.log(error); }
   }
 
   onPaymentComplete(txnDetails: TransactionDetails) {
