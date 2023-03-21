@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SLOTS_ROW_ONE, SLOTS_ROW_TWO } from 'src/app/services/data-share.service';
 import { SlotInfo } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -18,8 +19,8 @@ export class ParkingSlotSelectionComponent implements OnInit {
   duration!: FormControl;
   selectedSlot?: SlotInfo;
   // TODO: Load this info from JSON file
-  slotsRowOne: Array<SlotInfo> = [{ slotIndex: 1, slotNumber: 1, bookingStatus: 'BOOKED', bookingStatusCode: 0 }];
-  slotsRowTwo: Array<SlotInfo> = [{ slotIndex: 6, slotNumber: 6, bookingStatus: 'AVAILABLE', bookingStatusCode: 1 }];
+  slotsRowOne: Array<SlotInfo> = SLOTS_ROW_ONE;
+  slotsRowTwo: Array<SlotInfo> = SLOTS_ROW_TWO;
   constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
