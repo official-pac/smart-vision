@@ -8,11 +8,11 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpService {
 
-  BASE_URL = environment.baseUrl;
+  private BASE_URL = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
   get(url: string): Observable<any> {
-    return this.http.get(`${this.BASE_URL}${url}`)
+    return this.http.get(this.BASE_URL + url);
   }
 
 

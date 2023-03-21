@@ -26,3 +26,13 @@ export interface SlotInfo {
     bookingStatus: string;
     bookingStatusCode: number;
 }
+
+export interface CarType {
+    type: string;
+    displayName: string
+}
+
+export interface PlateType {
+    type: string;
+    displayName: string
+}
