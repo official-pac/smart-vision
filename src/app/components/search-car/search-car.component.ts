@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,11 +11,12 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './search-car.component.html',
   styleUrls: ['./search-car.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective]
+  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective, RouterModule]
 })
 export class SearchCarComponent implements OnInit {
 
   registrationNumber!: FormControl;
+  isCarNotFound = false;
   constructor(private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {
@@ -27,10 +28,12 @@ export class SearchCarComponent implements OnInit {
   private initField() {
     this.registrationNumber = new FormControl('', [Validators.required, Validators.minLength(7),
     Validators.maxLength(15), Validators.pattern('[\\w]+$')]);
+    this.isCarNotFound = false;
   }
 
   private async searchCar(): Promise<UserDetails | null> {
     try {
+      this.isCarNotFound = false;
       const userDetailsFromDB = this.storageService.allUserDetails
         ?.find((ele: UserDetails) => ele.rcNumber === this.registrationNumber.value);
       return userDetailsFromDB ? userDetailsFromDB : null;
@@ -45,7 +48,7 @@ export class SearchCarComponent implements OnInit {
             if (val) {
               this.storageService.userDetails = val;
               this.router.navigate(['car-details']);
-            } else { this.router.navigate(['registration']); }
+            } else { this.isCarNotFound = true; }
           });
       }
     } catch (error) { }
