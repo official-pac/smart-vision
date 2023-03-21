@@ -1,22 +1,26 @@
-
 <div class="wrapper">
     <div id="formContent">
         <h2 class="align-items-center mt-5">Registration</h2>
         <form [formGroup]="form" novalidate>
             <!-- Name of Owner -->
-            <div class=" row mt-5 g-3 align-items-center rgform">
+            <div class=" row align-items-center rgform">
                 <div class="col-6">
-                    <label for="ownerName" class="col-form-label">Name of Owner&nbsp;<span
+                    <label for="ownerName" class="col-form-label">Owner Name&nbsp;<span
                             style="color: red;">*</span></label>
                 </div>
                 <div class="col-6">
                     <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" class="form-control"
                         aria-describedby="ownerName" appUpperCase>
-                    <!-- <div *ngIf="form?.dirty && form?.invalid">
-                        <span *ngIf="form?.errors?.['minlength']">* Minimum 7 characters required</span>
-                        <span *ngIf="form?.errors?.['maxlength']">* Maximum 15 characters allowed</span>
-                        <span *ngIf="form?.errors?.['pattern']">* Invalid Format</span>
-                    </div> -->
+                    <div *ngIf="form?.get('ownerName')?.dirty && form?.get('ownerName')?.invalid">
+                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['minlength']">* Minimum 2
+                            characters required</span>
+                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['maxlength']">* Maximum 25
+                            character allowed</span>
+                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['pattern']">* Invalid
+                            Format</span>
+                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['required']">* Mandatory
+                            field</span>
+                    </div>
                 </div>
             </div>
             <!-- Email ID -->
@@ -27,6 +31,12 @@
                 <div class="col-6">
                     <input type="email" id="emailId" name="emailId" formControlName="emailId" class="form-control"
                         aria-describedby="emailId" appUpperCase>
+                    <div *ngIf="form?.get('emailId')?.dirty && form?.get('emailId')?.invalid">
+                        <span class="errorMsg" *ngIf="form?.get('emailId')?.errors?.['email']">* Invalid
+                            Format</span>
+                        <span class="errorMsg" *ngIf="form?.get('emailId')?.errors?.['required']">* Mandatory
+                            field</span>
+                    </div>
                 </div>
             </div>
 
@@ -39,6 +49,16 @@
                 <div class="col-6">
                     <input type="text" id="rcNumber" name="rcNumber" formControlName="rcNumber" class="form-control"
                         aria-describedby="rcNumber" appUpperCase>
+                    <div *ngIf="form?.get('rcNumber')?.dirty && form?.get('rcNumber')?.invalid">
+                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['minlength']">* Minimum 8
+                            characters required</span>
+                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['maxlength']">* Maximum 12
+                            character allowed</span>
+                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['pattern']">* Invalid
+                            Format</span>
+                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['required']">* Mandatory
+                            field</span>
+                    </div>
                 </div>
             </div>
 
@@ -50,6 +70,10 @@
                 <div class="col-6">
                     <input type="text" id="carType" name="carType" formControlName="carType" class="form-control"
                         aria-describedby="carType">
+                    <div *ngIf="form?.get('carType')?.dirty && form?.get('carType')?.invalid">
+                        <span class="errorMsg" *ngIf="form?.get('carType')?.errors?.['required']">* Mandatory
+                            field</span>
+                    </div>
                 </div>
             </div>
 
@@ -62,6 +86,10 @@
                 <div class="col-6">
                     <input type="text" id="plateType" name="plateType" formControlName="plateType" class="form-control"
                         aria-describedby="plateType">
+                    <div *ngIf="form?.get('plateType')?.dirty && form?.get('plateType')?.invalid">
+                        <span class="errorMsg" *ngIf="form?.get('plateType')?.errors?.['required']">* Mandatory
+                            field</span>
+                    </div>
                 </div>
             </div>
 
@@ -82,7 +110,7 @@
                     <label for="contact" class="col-form-label">Contact</label>
                 </div>
                 <div class="col-6">
-                    <input type="number" id="contact" name="contact" formControlName="contact" class="form-control"
+                    <input type="text" id="contact" name="contact" formControlName="contact" class="form-control"
                         aria-describedby="contact">
                 </div>
             </div>

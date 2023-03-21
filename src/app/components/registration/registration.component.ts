@@ -24,13 +24,15 @@ export class RegistrationComponent implements OnInit {
 
   private initForm() {
     this.form = this.fb.group({
-      ownerName: this.fb.control('', [Validators.required]),
-      emailId: this.fb.control('', [Validators.required]),
-      rcNumber: this.fb.control('', [Validators.required]),
+      ownerName: this.fb.control('', [Validators.required, Validators.pattern('[a-zA-Z ]+$'),
+      Validators.minLength(2), Validators.maxLength(25)]),
+      emailId: this.fb.control('', [Validators.required, Validators.email]),
+      rcNumber: this.fb.control('', [Validators.required, Validators.pattern('[\\w]+$'),
+      Validators.minLength(8), Validators.maxLength(12)]),
       carType: this.fb.control('', [Validators.required]),
       plateType: this.fb.control('', [Validators.required]),
       photo: this.fb.control(''),
-      contact: this.fb.control(null)
+      contact: this.fb.control('', [Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)])
     });
   }
 
@@ -49,7 +51,7 @@ export class RegistrationComponent implements OnInit {
       this.register(this.form.value)
         .then(() => this.router.navigate(['slots']))
         .catch(error => console.log('error: ', error));
-    } else { }
+    } else { console.log('invalid form', this.form.errors); }
   }
 
 }

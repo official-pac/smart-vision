@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
-import { HttpService } from 'src/app/services/http.service';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -16,9 +15,8 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class SearchCarComponent implements OnInit {
 
-  // TODO: Add validators like should be alpha-numeric, min length, max length etc.
   registrationNumber!: FormControl;
-  constructor(private router: Router, private storageService: StorageService, private httpService: HttpService) { }
+  constructor(private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.initField();
@@ -55,7 +53,7 @@ export class SearchCarComponent implements OnInit {
 
   private seedStorage(): void {
     this.storageService.allUserDetails = [{
-      ownerName: 'Arun', rcNumber: 'MH05EB7542', carType: 'SUV',
+      ownerName: 'Arun', rcNumber: 'MH05EB1234', carType: 'SUV',
       plateType: 'General', emailId: 'arun.chandran@gmail.com', contact: 9876543210, photo: ''
     }]
   }
