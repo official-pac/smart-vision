@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SlotInfo } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class ParkingSlotSelectionComponent implements OnInit {
 
   charge = 0;
   duration!: FormControl;
-  slot: number = 0;
+  selectedSlot?: SlotInfo;
+  // TODO: Load this info from JSON file
+  slotsRowOne: Array<SlotInfo> = [{ slotIndex: 1, slotNumber: 1, bookingStatus: 'BOOKED', bookingStatusCode: 0 }];
+  slotsRowTwo: Array<SlotInfo> = [{ slotIndex: 6, slotNumber: 6, bookingStatus: 'AVAILABLE', bookingStatusCode: 1 }];
   constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -27,8 +31,8 @@ export class ParkingSlotSelectionComponent implements OnInit {
     Validators.pattern('[0-9]+$'), Validators.min(1), Validators.max(24)]);
   }
 
-  onSlotClick(index: number): void {
-    this.slot = index;
+  onSlotClick(selectedSlot: SlotInfo): void {
+    this.selectedSlot = selectedSlot;
   }
 
   private calculateCharge(duration: number): number {
@@ -59,12 +63,12 @@ export class ParkingSlotSelectionComponent implements OnInit {
 
   submit(): void {
     if (this.isInvalid) return;
-    this.storageService.slotDetails = { charge: this.charge, duration: this.duration.value, spotNumber: this.slot };
+    this.storageService.slotDetails = { charge: this.charge, duration: this.duration.value, spotNumber: this.selectedSlot?.slotNumber || 0 };
     this.router.navigate(['payment']);
   }
 
   get isInvalid() {
-    return this.duration.invalid || this.slot === 0
+    return this.duration.invalid || !this.selectedSlot;
   }
 
 }

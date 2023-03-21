@@ -1,34 +1,61 @@
-<div>
-  <div class="grid-container">
-    <div class="grid-item" *ngFor="let slot of [1,2,3,4,5]" (click)="onSlotClick(slot)">{{slot}}</div>
-  </div>
-  <div class="grid-container">
-    <div class="grid-item" *ngFor="let slot of [6,7,8,9,10]" (click)="onSlotClick(slot)">{{slot}}</div>
-  </div>
-</div>
+<div class="container wrapper">
+  <div class="row">
+    <div class="col mt-5">
+      <div class="grid-container">
+        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 1 ? 'booked-slots' : 'available-slots'"
+          *ngFor="let slot of slotsRowOne" (click)="onSlotClick(slot)">{{slot.slotNumber}}</div>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item" [ngClass]="slot.bookingStatusCode === 1 ? 'booked-slots' : 'available-slots'"
+          *ngFor="let slot of slotsRowTwo" (click)="onSlotClick(slot)">{{slot.slotNumber}}</div>
+      </div>
 
-<div class="row" style="margin-top: 3em;">
-  <div class="column">
-    <h3>Charges</h3>
-    <div>First 4 hrs – 200 INR</div>
-    <div>4 hrs to 12 hrs – 30 INR per hour</div>
-    <div>12 hrs to 24 hrs – 25 INR per hour</div>
+    </div>
+
   </div>
-  <div class="column">
-    <div style="margin-top: 2em;">
-      <label for="duration">Slot: </label>
-      <span>{{slot}}</span>
+  <div class="row p-2">
+    <div class="col  boxes">
+      <div class="container">
+        <div class="jumbotron pt-3">
+          <!-- TODO: Read this content from JSON -->
+          <h3>Parking Charges</h3>
+          <p>First 4 hrs – 200 INR</p>
+          <p>4 hrs to 12 hrs – 30 INR per hour</p>
+          <p>12 hrs to 24 hrs – 25 INR per hour</p>
+        </div>
+      </div>
     </div>
-    <div style="margin-top: 2em;">
-      <label for="duration">Duration: </label>
-      <input type="number" id="duration" [formControl]="duration" (keyup)="onDurationChange()" />&nbsp;Hours
+    <div class="col boxes">
+      <div class="container">
+        <div class="jumbotron pt-3">
+          <h3>Slot Details</h3>
+          <p>Slot : {{this.selectedSlot?.slotNumber || 0}}</p>
+          <form>
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-4 col-form-label">Duration</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control-plaintext" id="duration" [formControl]="duration"
+                  (keyup)="onDurationChange()">
+              </div>
+              <div class="col-sm-2">
+                Hours
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div style="margin-top: 2em;">
-      <label for="duration">Amount: </label>
-      <span>{{charge}}&nbsp;INR</span>
-    </div>
-    <div style="margin-top: 2em;">
-      <button type="button" (click)="submit()" [disabled]="isInvalid">Book</button>
+    <div class="col boxes">
+      <div class="container">
+        <div class="jumbotron pt-3">
+          <h3>Payment Details</h3>
+          <p>Amount: {{charge}} INR</p>
+          <!-- <a href="#" class="btn btn-info btn-lg">Book your Slot</a> -->
+          <button type="button" class="btn btn-info btn-lg" (click)="submit()" [disabled]="isInvalid">Book your
+            Slot</button>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

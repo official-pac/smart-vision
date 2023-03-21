@@ -19,3 +19,10 @@ export interface TransactionDetails {
     transactionId: string,
     dateAndTimeOfTransaction: number
 }
+
+export interface SlotInfo {
+    slotIndex: number;
+    slotNumber: number;
+    bookingStatus: string;
+    bookingStatusCode: number;
+}

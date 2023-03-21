@@ -1,27 +1,35 @@
 .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    padding: 10px;
-    background-color: grey;
-    column-gap: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  padding: 10px;
+  background-color:  white;
+  column-gap: 10px;
 }
-
 .grid-item {
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+.boxes {
+  border: 1px solid grey;
+  margin: 20px;
+  background-color: white;
 
-.column {
-    float: left;
-    width: 33.33%;
-  }
+}
+.wrapper {
+  margin-top: 50px;
+  background-color:   #e0ebeb;
+}
+.booked-slots{
+  background-color:  #ff6666;
   
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+}
+.available-slots{
+  background-color:    #339933;
+}
