@@ -40,17 +40,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   private initForm(fields: Array<any>): void {
-    // this.form = this.fb.group({
-    //   ownerName: this.fb.control('', [Validators.required, Validators.pattern('[a-zA-Z ]+$'),
-    //   Validators.minLength(2), Validators.maxLength(25)]),
-    //   emailId: this.fb.control('', [Validators.required, Validators.email]),
-    //   rcNumber: this.fb.control('', [Validators.required, Validators.pattern('[\\w]+$'),
-    //   Validators.minLength(8), Validators.maxLength(12)]),
-    //   carType: this.fb.control('', [Validators.required]),
-    //   plateType: this.fb.control('', [Validators.required]),
-    //   // photo: this.fb.control(''),
-    //   contact: this.fb.control('', [Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)])
-    // });
     try {
       const length = fields?.length;
       for (let i = 0; i < length; i++) {

@@ -2,123 +2,6 @@
     <div id="formContent">
         <h2 class="align-items-center mt-5">{{configuration?.['title']}}</h2>
         <form [formGroup]="form" novalidate *ngIf="form">
-            <!-- Name of Owner -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="ownerName" class="col-form-label">Owner Name&nbsp;<span
-                            style="color: red;">*</span></label>
-                </div>
-                <div class="col-6">
-                    <input type="text" id="ownerName" name="ownerName" formControlName="ownerName" class="form-control"
-                        aria-describedby="ownerName">
-                    <div *ngIf="form?.get('ownerName')?.dirty && form?.get('ownerName')?.invalid">
-                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['minlength']">* Minimum 2
-                            characters required</span>
-                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['maxlength']">* Maximum 25
-                            character allowed</span>
-                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['pattern']">* Invalid
-                            Format</span>
-                        <span class="errorMsg" *ngIf="form?.get('ownerName')?.errors?.['required']">* Mandatory
-                            field</span>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Email ID -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="emailId" class="col-form-label">Email ID&nbsp;<span style="color: red;">*</span></label>
-                </div>
-                <div class="col-6">
-                    <input type="email" id="emailId" name="emailId" formControlName="emailId" class="form-control"
-                        aria-describedby="emailId">
-                    <div *ngIf="form?.get('emailId')?.dirty && form?.get('emailId')?.invalid">
-                        <span class="errorMsg" *ngIf="form?.get('emailId')?.errors?.['email']">* Invalid
-                            Format</span>
-                        <span class="errorMsg" *ngIf="form?.get('emailId')?.errors?.['required']">* Mandatory
-                            field</span>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- RC Number -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="rcNumber" class="col-form-label">RC Number&nbsp;<span
-                            style="color: red;">*</span></label>
-                </div>
-                <div class="col-6">
-                    <input type="text" id="rcNumber" name="rcNumber" formControlName="rcNumber" class="form-control"
-                        aria-describedby="rcNumber" appUpperCase>
-                    <div *ngIf="form?.get('rcNumber')?.dirty && form?.get('rcNumber')?.invalid">
-                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['minlength']">* Minimum 8
-                            characters required</span>
-                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['maxlength']">* Maximum 12
-                            character allowed</span>
-                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['pattern']">* Invalid
-                            Format</span>
-                        <span class="errorMsg" *ngIf="form?.get('rcNumber')?.errors?.['required']">* Mandatory
-                            field</span>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Car Type -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="carType" class="col-form-label">Car Type&nbsp;<span style="color: red;">*</span></label>
-                </div>
-                <div class="col-6">
-                    <select name="carType" id="carType" class="form-control" formControlName="carType"
-                        aria-describedby="carType">
-                        <option *ngFor="let type of carTypes;" [value]="type.type">{{type.displayName}}</option>
-                    </select>
-                    <div *ngIf="form?.get('carType')?.dirty && form?.get('carType')?.invalid">
-                        <span class="errorMsg" *ngIf="form?.get('carType')?.errors?.['required']">* Mandatory
-                            field</span>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Plate Type -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="plateType" class="col-form-label">Plate Type&nbsp;<span
-                            style="color: red;">*</span></label>
-                </div>
-                <div class="col-6">
-                    <select name="plateType" id="plateType" class="form-control" formControlName="plateType"
-                        aria-describedby="plateType">
-                        <option *ngFor="let type of plateTypes;" [value]="type.type">{{type.displayName}}</option>
-                    </select>
-                    <div *ngIf="form?.get('plateType')?.dirty && form?.get('plateType')?.invalid">
-                        <span class="errorMsg" *ngIf="form?.get('plateType')?.errors?.['required']">* Mandatory
-                            field</span>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Photo -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="photo" class="col-form-label">Photo</label>
-                </div>
-                <div class="col-6">
-                    <input type="text" id="photo" name="photo" formControlName="photo" class="form-control"
-                        aria-describedby="photo">
-                </div>
-            </div> -->
-
-            <!-- Contact -->
-            <!-- <div class=" row align-items-center rgform">
-                <div class="col-6">
-                    <label for="contact" class="col-form-label">Contact</label>
-                </div>
-                <div class="col-6">
-                    <input type="text" id="contact" name="contact" formControlName="contact" class="form-control"
-                        aria-describedby="contact">
-                </div>
-            </div> -->
-
             <!-- ----------------------------------- dynamic format --------------------------------- -->
             <ng-container *ngFor="let field of form?.controls | keyvalue : returnZero; let i=index;">
                 <ng-container *ngIf="fields?.[i].fieldType === 'text'">
@@ -134,7 +17,7 @@
                                 <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('minlength')">* Minimum
                                     {{form.get(field.key)?.errors?.['minlength']?.['requiredLength']}}
                                     characters required</span>
-                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('maxlength')">* Maximum 
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('maxlength')">* Maximum
                                     {{form.get(field.key)?.errors?.['maxlength']?.['requiredLength']}}
                                     character allowed</span>
                                 <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('pattern')">* Invalid
