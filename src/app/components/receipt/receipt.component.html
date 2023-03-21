@@ -1,14 +1,27 @@
-<div style="text-align: center;">
-    <div style="margin-top: 2em;">
-        <div>
-            <h3>Receipt</h3>
-            <div>Transaction Id: {{transactionId}}</div>
-            <div>Car Registration Number: {{carRegistrationNumber}}</div>
-            <div>Transaction Time: {{transactionTime | date: 'medium'}}</div>
-            <div>Total Amount: {{totalAmount | number : '1.2-2'}}&nbsp;INR</div>
+<div class="wrapper ">
+    <div id="formContent">
+        <h2 class="align-items-center mt-5">Receipt</h2>
+        <div class="g-3 rgform">
+            <div class=" d-flex">
+                <h5>Transaction Id: </h5>&nbsp;&nbsp;
+                <h6 class="align-items-center mt-1">{{transactionId}}</h6>
+            </div>
+            <div class=" d-flex">
+                <h5>Car Registration Number: </h5>&nbsp;&nbsp;
+                <h6 class="align-items-center mt-1">{{carRegistrationNumber}}</h6>
+            </div>
+            <div class=" d-flex">
+                <h5>Transaction Time: </h5>&nbsp;&nbsp;
+                <h6 class="align-items-center mt-1">{{transactionTime | date: 'medium'}}</h6>
+            </div>
+            <div class=" d-flex">
+                <h5>Total Amount: </h5>&nbsp;&nbsp;
+                <h6 class="align-items-center mt-1">{{totalAmount | number : '1.2-2'}}</h6>
+            </div>
+
+            <div class="d-flex btnSubmit">
+                <p>You will be redirected in {{secondsLeft}}s</p>
+            </div>
         </div>
-    </div>
-    <div style="margin-top: 1em;">
-        <p>Redirection in {{secondsLeft}}s</p>
     </div>
 </div>
