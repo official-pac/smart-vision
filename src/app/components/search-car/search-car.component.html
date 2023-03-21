@@ -1,0 +1,31 @@
+<div class="wrapper ">
+    <div id="formContent">
+        <h2 class="align-items-center mt-5">Registration</h2>
+        <form>
+            <div class=" row mt-5 g-3 align-items-center rgform">
+                <div class="col-6">
+                    <label for="rnumber" class="col-form-label">Registration Number</label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="registrationNumber" name="registrationNumber"
+                        [formControl]="registrationNumber" class="form-control" placeholder="e.g. MH05EB3565"
+                        aria-describedby="rnumber" appUpperCase>
+                </div>
+                <ng-container *ngIf="registrationNumber?.dirty && registrationNumber?.invalid">
+                    <span *ngIf="registrationNumber?.errors?.['minlength']">* Minimum 7 characters required</span>
+                    <span *ngIf="registrationNumber?.errors?.['maxlength']">* Maximum 15 characters allowed</span>
+                    <span *ngIf="registrationNumber?.errors?.['pattern']">* Invalid Format</span>
+                </ng-container>
+                <div>
+                    <span class="form-text">
+                        (*Input the car Registration Number Without any space)
+                    </span>
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="button" (click)="submit()"
+                    [disabled]="registrationNumber.invalid">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
