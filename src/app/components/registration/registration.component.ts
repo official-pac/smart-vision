@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
       Validators.minLength(8), Validators.maxLength(12)]),
       carType: this.fb.control('', [Validators.required]),
       plateType: this.fb.control('', [Validators.required]),
-      photo: this.fb.control(''),
+      // photo: this.fb.control(''),
       contact: this.fb.control('', [Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)])
     });
   }
