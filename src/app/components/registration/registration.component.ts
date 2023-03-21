@@ -16,6 +16,17 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RegistrationComponent implements OnInit {
 
   form!: FormGroup;
+  carTypes: Array<{ type: string, displayName: string }> = [
+    { type: 'SUV', displayName: 'SUV' },
+    { type: 'SEDAN', displayName: 'Sedan' },
+    { type: 'HATCHBACK', displayName: 'Hatchback' },
+  ];
+  plateTypes: Array<{ type: string, displayName: string }> = [
+    { type: 'PUBLIC', displayName: 'Public' },
+    { type: 'PRIVATE', displayName: 'Private' },
+    { type: 'GOVERNMENT', displayName: 'Government' },
+    { type: 'TAXI', displayName: 'Taxi' },
+  ];
   constructor(private fb: FormBuilder, private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {

@@ -43,37 +43,93 @@
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="Enter Name" formControlName="cardHolderName"
                 appUpperCase>
+            <div *ngIf="form?.get('cardHolderName')?.dirty && form?.get('cardHolderName')?.invalid">
+                <p class="errorMsg" *ngIf="form?.get('cardHolderName')?.errors?.['minlength']">* Minimum 2
+                    characters required</p>
+                <p class="errorMsg" *ngIf="form?.get('cardHolderName')?.errors?.['maxlength']">* Maximum 50
+                    character allowed</p>
+                <p class="errorMsg" *ngIf="form?.get('cardHolderName')?.errors?.['pattern']">* Invalid
+                    Format</p>
+                <p class="errorMsg" *ngIf="form?.get('cardHolderName')?.errors?.['required']">* Mandatory
+                    field</p>
+            </div>
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-4 col-form-label">Card Number</label>
         <div class="col-sm-8">
-            <input type="number" class="form-control" placeholder="Card Number" formControlName="cardNumber">
+            <input type="text" class="form-control" placeholder="Card Number" name="cardNumber"
+                formControlName="cardNumber">
+            <div *ngIf="form?.get('cardNumber')?.dirty && form?.get('cardNumber')?.invalid">
+                <p class="errorMsg" *ngIf="form?.get('cardNumber')?.errors?.['minlength']">* Minimum 16
+                    characters required</p>
+                <p class="errorMsg" *ngIf="form?.get('cardNumber')?.errors?.['maxlength']">* Maximum 16
+                    character allowed</p>
+                <p class="errorMsg" *ngIf="form?.get('cardNumber')?.errors?.['pattern']">* Invalid
+                    Format</p>
+                <p class="errorMsg" *ngIf="form?.get('cardNumber')?.errors?.['required']">* Mandatory
+                    field</p>
+            </div>
         </div>
     </div>
     <div class="mb-3 row">
-        <label class="col-sm-4 col-form-label ">Year of Expiry</label>
+        <label class="col-sm-4 col-form-label ">Year of Expiry(YY)</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="Enter Year (YY)" formControlName="yearOfExpiry"
                 maxlength=2>
+            <div *ngIf="form?.get('yearOfExpiry')?.dirty && form?.get('yearOfExpiry')?.invalid">
+                <p class="errorMsg" *ngIf="form?.get('yearOfExpiry')?.errors?.['minlength']">* Minimum 2
+                    digits required</p>
+                <p class="errorMsg" *ngIf="form?.get('yearOfExpiry')?.errors?.['maxlength']">* Maximum 2
+                    digits allowed</p>
+                <p class="errorMsg" *ngIf="form?.get('yearOfExpiry')?.errors?.['pattern']">* Invalid
+                    Format</p>
+                <p class="errorMsg" *ngIf="form?.get('yearOfExpiry')?.errors?.['required']">* Mandatory
+                    field</p>
+                <p class="errorMsg" *ngIf="form?.get('yearOfExpiry')?.errors?.['min']">* Minimum should be current
+                    Year</p>
+            </div>
         </div>
     </div>
     <div class="mb-3 row">
-        <label class="col-sm-4 col-form-label">Month of Expiry</label>
+        <label class="col-sm-4 col-form-label">Month of Expiry(MM)</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="Enter Month (MM)" formControlName="monthOfExpiry"
                 maxlength=2>
+            <div *ngIf="form?.get('monthOfExpiry')?.dirty && form?.get('monthOfExpiry')?.invalid">
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['minlength']">* Minimum 2
+                    digits required</p>
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['maxlength']">* Maximum 2
+                    digits allowed</p>
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['pattern']">* Invalid
+                    Format</p>
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['required']">* Mandatory
+                    field</p>
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['min']">* Minimum should be current
+                    month</p>
+                <p class="errorMsg" *ngIf="form?.get('monthOfExpiry')?.errors?.['max']">* Maximum should be 12</p>
+            </div>
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-4 col-form-label ">CVV</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="Enter CVV" formControlName="cvv" maxlength="3">
+            <div *ngIf="form?.get('cvv')?.dirty && form?.get('cvv')?.invalid">
+                <p class="errorMsg" *ngIf="form?.get('cvv')?.errors?.['minlength']">* Minimum 3
+                    digits required</p>
+                <p class="errorMsg" *ngIf="form?.get('cvv')?.errors?.['maxlength']">* Maximum 3
+                    digits allowed</p>
+                <p class="errorMsg" *ngIf="form?.get('cvv')?.errors?.['pattern']">* Invalid
+                    Format</p>
+                <p class="errorMsg" *ngIf="form?.get('cvv')?.errors?.['required']">* Mandatory
+                    field</p>
+            </div>
         </div>
     </div>
     <div class="d-grid gap-2 ">
         <button class="btn btn-primary" type="button" (click)="makePayment()" [disabled]="this.form.invalid"
             *ngIf="!isProcessing" style="margin-top: 1em;">Make Payment</button>
-            <p *ngIf="isProcessing"><b>Please wait...</b></p>
+        <p *ngIf="isProcessing"><b>Please wait...</b></p>
     </div>
 </form>

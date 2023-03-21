@@ -68,8 +68,10 @@
                     <label for="carType" class="col-form-label">Car Type&nbsp;<span style="color: red;">*</span></label>
                 </div>
                 <div class="col-6">
-                    <input type="text" id="carType" name="carType" formControlName="carType" class="form-control"
+                    <select name="carType" id="carType" class="form-control" formControlName="carType"
                         aria-describedby="carType">
+                        <option *ngFor="let type of carTypes;" [value]="type.type">{{type.displayName}}</option>
+                    </select>
                     <div *ngIf="form?.get('carType')?.dirty && form?.get('carType')?.invalid">
                         <span class="errorMsg" *ngIf="form?.get('carType')?.errors?.['required']">* Mandatory
                             field</span>
@@ -84,8 +86,10 @@
                             style="color: red;">*</span></label>
                 </div>
                 <div class="col-6">
-                    <input type="text" id="plateType" name="plateType" formControlName="plateType" class="form-control"
+                    <select name="plateType" id="plateType" class="form-control" formControlName="plateType"
                         aria-describedby="plateType">
+                        <option *ngFor="let type of plateTypes;" [value]="type.type">{{type.displayName}}</option>
+                    </select>
                     <div *ngIf="form?.get('plateType')?.dirty && form?.get('plateType')?.invalid">
                         <span class="errorMsg" *ngIf="form?.get('plateType')?.errors?.['required']">* Mandatory
                             field</span>
