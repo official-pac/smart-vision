@@ -33,8 +33,6 @@ export class SearchCarComponent implements OnInit {
 
   private async searchCar(): Promise<UserDetails | null> {
     try {
-      // return firstValueFrom(this.httpService.get(''))
-      //   .catch(error => { throw error; })
       const userDetailsFromDB = this.storageService.allUserDetails
         ?.find((ele: UserDetails) => ele.rcNumber === this.registrationNumber.value);
       return userDetailsFromDB ? userDetailsFromDB : null;
@@ -43,12 +41,9 @@ export class SearchCarComponent implements OnInit {
 
   submit(): void {
     try {
-      console.log('value: ', this.registrationNumber.valid);
       if (this.registrationNumber.valid) {
-        // this.dataShareService.setRegistrationNumber(this.registrationNumber.value);
         this.searchCar()
           .then((val: UserDetails | null) => {
-            console.log('user-details: ', val);
             if (val) {
               this.storageService.userDetails = val;
               this.router.navigate(['car-details']);

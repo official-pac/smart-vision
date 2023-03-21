@@ -45,7 +45,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   submit() {
-    console.log('Form: ', this.form.value);
     if (this.form.valid) {
       this.register(this.form.value)
         .then(() => this.router.navigate(['slots']))
