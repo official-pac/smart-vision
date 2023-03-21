@@ -1,9 +1,9 @@
 <div class="wrapper">
     <div id="formContent">
-        <h2 class="align-items-center mt-5">Registration</h2>
-        <form [formGroup]="form" novalidate>
+        <h2 class="align-items-center mt-5">{{configuration?.['title']}}</h2>
+        <form [formGroup]="form" novalidate *ngIf="form">
             <!-- Name of Owner -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="ownerName" class="col-form-label">Owner Name&nbsp;<span
                             style="color: red;">*</span></label>
@@ -22,9 +22,9 @@
                             field</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Email ID -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="emailId" class="col-form-label">Email ID&nbsp;<span style="color: red;">*</span></label>
                 </div>
@@ -38,10 +38,10 @@
                             field</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- RC Number -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="rcNumber" class="col-form-label">RC Number&nbsp;<span
                             style="color: red;">*</span></label>
@@ -60,10 +60,10 @@
                             field</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Car Type -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="carType" class="col-form-label">Car Type&nbsp;<span style="color: red;">*</span></label>
                 </div>
@@ -77,10 +77,10 @@
                             field</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Plate Type -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="plateType" class="col-form-label">Plate Type&nbsp;<span
                             style="color: red;">*</span></label>
@@ -95,7 +95,7 @@
                             field</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Photo -->
             <!-- <div class=" row align-items-center rgform">
@@ -109,7 +109,7 @@
             </div> -->
 
             <!-- Contact -->
-            <div class=" row align-items-center rgform">
+            <!-- <div class=" row align-items-center rgform">
                 <div class="col-6">
                     <label for="contact" class="col-form-label">Contact</label>
                 </div>
@@ -117,7 +117,78 @@
                     <input type="text" id="contact" name="contact" formControlName="contact" class="form-control"
                         aria-describedby="contact">
                 </div>
-            </div>
+            </div> -->
+
+            <!-- ----------------------------------- dynamic format --------------------------------- -->
+            <ng-container *ngFor="let field of form?.controls | keyvalue : returnZero; let i=index;">
+                <ng-container *ngIf="fields?.[i].fieldType === 'text'">
+                    <div class=" row align-items-center rgform">
+                        <div class="col-6">
+                            <label for="{{field.key}}" class="col-form-label">{{fields?.[i].displayName}}&nbsp;<span
+                                    style="color: red;" *ngIf="fields?.[i].isMandatory">*</span></label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" id="{{field.key}}" name="{{field.key}}" formControlName="{{field.key}}"
+                                class="form-control">
+                            <div *ngIf="form?.get(field.key)?.dirty && form?.get(field.key)?.invalid">
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('minlength')">* Minimum
+                                    {{form.get(field.key)?.errors?.['minlength']?.['requiredLength']}}
+                                    characters required</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('maxlength')">* Maximum 
+                                    {{form.get(field.key)?.errors?.['maxlength']?.['requiredLength']}}
+                                    character allowed</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('pattern')">* Invalid
+                                    Format</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.hasError('required')">* Mandatory
+                                    field</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="fields?.[i].fieldType === 'email'">
+                    <div class=" row align-items-center rgform">
+                        <div class="col-6">
+                            <label for="{{field.key}}" class="col-form-label">{{fields?.[i].displayName}}&nbsp;<span
+                                    style="color: red;" *ngIf="fields?.[i].isMandatory">*</span></label>
+                        </div>
+                        <div class="col-6">
+                            <input type="email" id="{{field.key}}" name="{{field.key}}" formControlName="{{field.key}}"
+                                class="form-control">
+                            <div *ngIf="form?.get(field.key)?.dirty && form?.get(field.key)?.invalid">
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.errors?.['minlength']">* Minimum 2
+                                    characters required</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.errors?.['maxlength']">* Maximum 25
+                                    character allowed</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.errors?.['email']">* Invalid
+                                    Format</span>
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.errors?.['required']">* Mandatory
+                                    field</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="fields?.[i].fieldType === 'select'">
+                    <div class=" row align-items-center rgform">
+                        <div class="col-6">
+                            <label for="plateType" class="col-form-label">{{fields?.[i].displayName}}&nbsp;<span
+                                    style="color: red;" *ngIf="fields?.[i].isMandatory">*</span></label>
+                        </div>
+                        <div class="col-6">
+                            <select name="{{field.key}}" id="{{field.key}}" class="form-control"
+                                formControlName="{{field.key}}">
+                                <option *ngFor="let type of fields?.[i].options;" [value]="type.type">
+                                    {{type.displayName}}
+                                </option>
+                            </select>
+                            <div *ngIf="form?.get(field.key)?.dirty && form?.get(field.key)?.invalid">
+                                <span class="errorMsg" *ngIf="form?.get(field.key)?.errors?.['required']">* Mandatory
+                                    field</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <!-- ----------------------------------- dynamic format-end --------------------------------- -->
 
             <div class="row align-items-center rgform">
                 <button class="btn btn-primary" type="button" (click)="submit()"

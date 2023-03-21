@@ -152,5 +152,115 @@
       "bookingStatus": "BOOKED",
       "bookingStatusCode": 0
     }
-  ]
+  ],
+  "configuration": {
+    "registration": {
+      "title": "REGISTRATION",
+      "fields": [
+        {
+          "displayName": "Owner Name",
+          "fieldName": "ownerName",
+          "isMandatory": true,
+          "fieldType": "text",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": true,
+            "maxLength": 25,
+            "minLength": 2,
+            "pattern": "[a-zA-Z ]+$"
+          }
+        },
+        {
+          "displayName": "Email ID",
+          "fieldName": "emailId",
+          "isMandatory": true,
+          "fieldType": "email",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": true,
+            "maxLength": 50,
+            "minLength": 2
+          }
+        },
+        {
+          "displayName": "RC Number",
+          "fieldName": "rcNumber",
+          "isMandatory": true,
+          "fieldType": "text",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": true,
+            "maxLength": 12,
+            "minLength": 8,
+            "pattern": "[\\w]+$"
+          }
+        },
+        {
+          "displayName": "Car Type",
+          "fieldName": "carType",
+          "isMandatory": true,
+          "fieldType": "select",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": true
+          },
+          "options": [
+            {
+              "type": "SUV",
+              "displayName": "SUV"
+            },
+            {
+              "type": "SEDAN",
+              "displayName": "Sedan"
+            },
+            {
+              "type": "HATCHBACK",
+              "displayName": "Hatchback"
+            }
+          ]
+        },
+        {
+          "displayName": "Plate Type",
+          "fieldName": "plateType",
+          "isMandatory": true,
+          "fieldType": "select",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": true
+          },
+          "options": [
+            {
+              "type": "PUBLIC",
+              "displayName": "Public"
+            },
+            {
+              "type": "PRIVATE",
+              "displayName": "Private"
+            },
+            {
+              "type": "GOVERNMENT",
+              "displayName": "Government"
+            },
+            {
+              "type": "TAXI",
+              "displayName": "Taxi"
+            }
+          ]
+        },
+        {
+          "displayName": "Contact",
+          "fieldName": "contact",
+          "isMandatory": false,
+          "fieldType": "text",
+          "initialValue": "",
+          "validations": {
+            "isMandatory": false,
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "[0-9]+$"
+          }
+        }
+      ]
+    }
+  }
 }

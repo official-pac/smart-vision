@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
@@ -17,30 +17,75 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  form!: FormGroup;
+  form: FormGroup = new FormGroup({});
   carTypes: Array<CarType> = [];
   plateTypes: Array<PlateType> = [];
+  configuration?: { [key: string]: any };
+  fields?: Array<any>;
   constructor(private fb: FormBuilder, private router: Router, private storageService: StorageService,
     private httpService: HttpService) { }
 
   ngOnInit(): void {
-    this.initForm();
-    this.initCarTypes();
-    this.initPlateTypes();
+    this.loadUI();
   }
 
-  private initForm() {
-    this.form = this.fb.group({
-      ownerName: this.fb.control('', [Validators.required, Validators.pattern('[a-zA-Z ]+$'),
-      Validators.minLength(2), Validators.maxLength(25)]),
-      emailId: this.fb.control('', [Validators.required, Validators.email]),
-      rcNumber: this.fb.control('', [Validators.required, Validators.pattern('[\\w]+$'),
-      Validators.minLength(8), Validators.maxLength(12)]),
-      carType: this.fb.control('', [Validators.required]),
-      plateType: this.fb.control('', [Validators.required]),
-      // photo: this.fb.control(''),
-      contact: this.fb.control('', [Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)])
-    });
+  private async loadUI(): Promise<any> {
+    try {
+      this.configuration = await firstValueFrom(this.httpService.get('/configuration', 'registration'));
+      this.fields = this.configuration?.['fields'];
+      this.initForm(this.configuration?.['fields']);
+      this.initCarTypes();
+      this.initPlateTypes();
+    } catch (error) { console.log(error); }
+  }
+
+  private initForm(fields: Array<any>): void {
+    // this.form = this.fb.group({
+    //   ownerName: this.fb.control('', [Validators.required, Validators.pattern('[a-zA-Z ]+$'),
+    //   Validators.minLength(2), Validators.maxLength(25)]),
+    //   emailId: this.fb.control('', [Validators.required, Validators.email]),
+    //   rcNumber: this.fb.control('', [Validators.required, Validators.pattern('[\\w]+$'),
+    //   Validators.minLength(8), Validators.maxLength(12)]),
+    //   carType: this.fb.control('', [Validators.required]),
+    //   plateType: this.fb.control('', [Validators.required]),
+    //   // photo: this.fb.control(''),
+    //   contact: this.fb.control('', [Validators.pattern('[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)])
+    // });
+    try {
+      const length = fields?.length;
+      for (let i = 0; i < length; i++) {
+        const field = fields[i];
+        const validators: Array<ValidatorFn> = this.constructValidators(field.validations, field.fieldType);
+        const control: FormControl = this.fb.control(field.initialValue, validators);
+        this.form.addControl(field.fieldName, control);
+      }
+      this.form.updateValueAndValidity();
+    } catch (error) { console.log(error); }
+  }
+
+  returnZero(): number { return 0; }
+
+  private constructValidators(validations: { [key: string]: string }, fieldType: string): Array<ValidatorFn> {
+    try {
+      const validators = [];
+
+      if (validations?.['isMandatory']) {
+        validators.push(Validators.required);
+      }
+      if (validations?.['pattern']) {
+        validators.push(Validators.pattern(validations?.['pattern']));
+      }
+      if (validations?.['minLength']) {
+        validators.push(Validators.minLength(Number(validations['minLength'])));
+      }
+      if (validations?.['maxLength']) {
+        validators.push(Validators.maxLength(Number(validations['maxLength'])));
+      }
+      if (fieldType === 'email') {
+        validators.push(Validators.email);
+      }
+      return validators;
+    } catch (error) { throw error; }
   }
 
   private async register(userDetails: UserDetails): Promise<any> {
