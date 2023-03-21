@@ -33,3 +33,7 @@ input[type=text]:focus {
 .available-slots{
   background-color:    #339933;
 }
+.errorMsg {
+  color: red;
+  font-size: small;
+}
