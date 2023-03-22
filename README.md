@@ -19,5 +19,6 @@ Guidance on branch-wise code
               and functioality.            
   
   NOTE: 1. Start json-server before using the appliction.
+           Command: json-server --watch db.json
   
         2. Seeded RC Number: MH05EB1234
