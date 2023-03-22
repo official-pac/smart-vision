@@ -37,3 +37,7 @@ input[type=text]:focus {
   color: red;
   font-size: small;
 }
+#duration {
+  border: none;
+  border-bottom: 2px solid lightseagreen;
+}
