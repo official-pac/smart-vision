@@ -1,3 +1,5 @@
+import { NgControl } from "@angular/forms";
+
 export interface UserDetails {
     ownerName: string;
     emailId: string;
@@ -35,4 +37,9 @@ export interface CarType {
 export interface PlateType {
     type: string;
     displayName: string
+}
+
+export interface ElementFocus {
+    elementRef: HTMLInputElement;
+    control: NgControl
 }

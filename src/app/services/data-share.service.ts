@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { ElementFocus } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +8,20 @@ import { BehaviorSubject } from 'rxjs';
 export class DataShareService {
 
   private userDetailsSubject = new BehaviorSubject<any>(null);
+  private focusedElementSubject = new Subject<ElementFocus>();
+  focusedElement$ = this.focusedElementSubject.asObservable();
+
+  private keyPressSubjetct = new Subject<string | number>();
+  keyPressSubjetct$ = this.keyPressSubjetct.asObservable();
   constructor() { }
 
-  // setRegistrationNumber(number: string): void {
-  //   sessionStorage.setItem('registrationNumber', number);
-  // }
+  setFocusedElement(ele: ElementFocus): void {
+    this.focusedElementSubject.next(ele);
+  }
 
-  // getRegistrationNumber(): string | null {
-  //   return sessionStorage.getItem('registrationNumber') || null;
-  // }
+  setKeyPressedValue(val: string | number): void {
+    this.keyPressSubjetct.next(val);
+  }
 
   set userDetails(userDetails: {}) {
     this.userDetailsSubject.next(userDetails);

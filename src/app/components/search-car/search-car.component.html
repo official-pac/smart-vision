@@ -9,7 +9,7 @@
                 <div class="col-6">
                     <input type="text" id="registrationNumber" name="registrationNumber"
                         [formControl]="registrationNumber" class="form-control" placeholder="e.g. MH05EB3565"
-                        aria-describedby="rnumber" appUpperCase>
+                        aria-describedby="rnumber" appKeyboard>
                 </div>
                 <ng-container *ngIf="registrationNumber?.dirty && registrationNumber?.invalid">
                     <span *ngIf="registrationNumber?.errors?.['minlength']">* Minimum 7 characters required</span>
@@ -37,3 +37,4 @@
         </form>
     </div>
 </div>
+<app-keyboard></app-keyboard>

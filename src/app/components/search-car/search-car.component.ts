@@ -2,22 +2,26 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { KeyboardDirective } from 'src/app/directives/keyboard.directive';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
+import { DataShareService } from 'src/app/services/data-share.service';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
 
 @Component({
   selector: 'app-search-car',
   templateUrl: './search-car.component.html',
   styleUrls: ['./search-car.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective, RouterModule]
+  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective, RouterModule,
+    KeyboardComponent, KeyboardDirective]
 })
 export class SearchCarComponent implements OnInit {
 
   registrationNumber!: FormControl;
   isCarNotFound = false;
-  constructor(private router: Router, private storageService: StorageService) { }
+  constructor(private router: Router, private storageService: StorageService, private dataShareService: DataShareService) { }
 
   ngOnInit(): void {
     this.initField();
