@@ -18,7 +18,7 @@ Guidance on branch-wise code
      comment: Contains custome made keyboard functionality. This functionality has been implemented only in the Search page to show-case the feasibility
               and functioality.            
   
-  NOTE: 1. Start json-server before using the appliction.
+  NOTE: 1. Start json-server before using the appliction. Execute below command inside the project root folder.
   
            Command: json-server --watch db.json
   
