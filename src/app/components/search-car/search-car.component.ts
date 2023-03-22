@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { KeyboardDirective } from 'src/app/directives/keyboard.directive';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 import { DataShareService } from 'src/app/services/data-share.service';
-import { UserDetails } from 'src/app/services/interface';
+import { ElementFocus, UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
 import { KeyboardComponent } from '../keyboard/keyboard.component';
 
@@ -21,12 +23,15 @@ export class SearchCarComponent implements OnInit {
 
   registrationNumber!: FormControl;
   isCarNotFound = false;
+  showOSKeyboard = false;
+  subscription?: Subscription;
   constructor(private router: Router, private storageService: StorageService, private dataShareService: DataShareService) { }
 
   ngOnInit(): void {
     this.initField();
     this.storageService.clearSessionStorage();
     this.seedStorage();
+    this.subscribeToKeyboardEvent();
   }
 
   private initField() {
@@ -63,6 +68,18 @@ export class SearchCarComponent implements OnInit {
       ownerName: 'Arun', rcNumber: 'MH05EB1234', carType: 'SUV',
       plateType: 'General', emailId: 'arun.chandran@gmail.com', contact: 9876543210, photo: ''
     }]
+  }
+
+  private subscribeToKeyboardEvent(): void {
+    try {
+      this.subscription = this.dataShareService.focusedElement$
+        .pipe(distinctUntilChanged())
+        .subscribe((val: ElementFocus) => this.showOSKeyboard = true);
+    } catch (error) { }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
 }
