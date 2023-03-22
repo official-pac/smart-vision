@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { MatKeyboardModule } from 'angular-onscreen-material-keyboard';
 import { UpperCaseDirective } from 'src/app/directives/upper-case.directive';
 import { UserDetails } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,7 +12,7 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './search-car.component.html',
   styleUrls: ['./search-car.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective, RouterModule]
+  imports: [CommonModule, ReactiveFormsModule, UpperCaseDirective, RouterModule, MatKeyboardModule]
 })
 export class SearchCarComponent implements OnInit {
 
