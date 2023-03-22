@@ -1,55 +1,24 @@
 <div class="row modalbody">
     <div class="kb-row">
 
-        <button class="btn btn-dark" type="button" (click)="onClick('1')">1</button>
-        <button class="btn btn-dark" type="button" (click)="onClick('2')">2</button>
-        <button class="btn btn-dark" type="button">3</button>
-        <button class="btn btn-dark" type="button">4</button>
-        <button class="btn btn-dark" type="button">5</button>
-        <button class="btn btn-dark" type="button">6</button>
-        <button class="btn btn-dark" type="button">7</button>
-        <button class="btn btn-dark" type="button">8</button>
-        <button class="btn btn-dark" type="button">9</button>
-        <button class="btn btn-dark" type="button">0</button>
-
+        <button class="btn btn-dark" type="button" *ngFor="let key of numericKeys; trackBy: trackByFn"
+            (click)="onClick(key.value)">{{key.displayName}}</button>
     </div>
     <div class="kb-row">
 
-        <button class="btn btn-dark" type="button">q</button>
-        <button class="btn btn-dark" type="button">w</button>
-        <button class="btn btn-dark" type="button">e</button>
-        <button class="btn btn-dark" type="button">r</button>
-        <button class="btn btn-dark" type="button">t</button>
-        <button class="btn btn-dark" type="button">y</button>
-        <button class="btn btn-dark" type="button">u</button>
-        <button class="btn btn-dark" type="button">i</button>
-        <button class="btn btn-dark" type="button">o</button>
-        <button class="btn btn-dark" type="button">p</button>
-
-
+        <button class="btn btn-dark" type="button" *ngFor="let key of aplhaKeyRowOne; trackBy: trackByFn"
+            (click)="onClick(key.value)">{{key.displayName}}</button>
     </div>
     <div class="kb-row">
-        <button class="btn btn-dark" type="button">a</button>
-        <button class="btn btn-dark" type="button">s</button>
-        <button class="btn btn-dark" type="button">d</button>
-        <button class="btn btn-dark" type="button">f</button>
-        <button class="btn btn-dark" type="button">g</button>
-        <button class="btn btn-dark" type="button">h</button>
-        <button class="btn btn-dark" type="button">j</button>
-        <button class="btn btn-dark" type="button">k</button>
-        <button class="btn btn-dark" type="button">l</button>
+        <button class="btn btn-dark" type="button" *ngFor="let key of aplhaKeyRowTwo; trackBy: trackByFn"
+            (click)="onClick(key.value)">{{key.displayName}}</button>
     </div>
     <div class="kb-row">
-        <button class="btn btn-dark" type="button">z</button>
-        <button class="btn btn-dark" type="button">x</button>
-        <button class="btn btn-dark" type="button">c</button>
-        <button class="btn btn-dark" type="button">v</button>
-        <button class="btn btn-dark" type="button">b</button>
-        <button class="btn btn-dark" type="button">n</button>
-        <button class="btn btn-dark" type="button">m</button>
+        <button class="btn btn-dark" type="button" *ngFor="let key of aplhaKeyRowThree; trackBy: trackByFn"
+            (click)="onClick(key.value)">{{key.displayName}}</button>
     </div>
     <div class="kb-row">
-        <button class="btn1 btn-dark" type="button"> spacebar </button>
+        <button class="btn1 btn-dark" type="button" (click)="onClick(' ')"> spacebar </button>
     </div>
 
 </div>

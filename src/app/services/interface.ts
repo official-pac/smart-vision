@@ -43,3 +43,9 @@ export interface ElementFocus {
     elementRef: HTMLInputElement;
     control: NgControl
 }
+
+export interface KeyBoardKey {
+    id: number,
+    displayName: string;
+    value: any;
+}
