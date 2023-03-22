@@ -3,17 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { SLOTS_ROW_ONE, SLOTS_ROW_TWO } from 'src/app/services/data-share.service';
+import { KeyboardDirective } from 'src/app/directives/keyboard.directive';
 import { HttpService } from 'src/app/services/http.service';
 import { SlotInfo } from 'src/app/services/interface';
 import { StorageService } from 'src/app/services/storage.service';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
 
 @Component({
   selector: 'app-parking-slot-selection',
   templateUrl: './parking-slot-selection.component.html',
   styleUrls: ['./parking-slot-selection.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, KeyboardDirective, KeyboardComponent]
 })
 export class ParkingSlotSelectionComponent implements OnInit {
 

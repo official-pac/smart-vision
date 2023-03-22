@@ -37,7 +37,7 @@
               <label for="staticEmail" class="col-sm-4 col-form-label">Duration</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control-plaintext" id="duration" [formControl]="duration"
-                  (keyup)="onDurationChange()">
+                  (keyup)="onDurationChange()" appKeyboard>
                 <div *ngIf="duration?.dirty && duration?.invalid">
                   <span class="errorMsg" *ngIf="duration?.errors?.['pattern']">* Invalid
                     Format</span>
@@ -68,4 +68,7 @@
       </div>
     </div>
   </div>
+  <ng-container>
+    <app-keyboard></app-keyboard>
+  </ng-container>
 </div>
